@@ -1,0 +1,14 @@
+*.swp
+.*.swp
+*~
+\#*#
+.DS_Store
+._*
+sync.ffs_db
+sync.ffs_lock
+Icon
+.unison*
+*.pyc
+*.o
+*.so
+*.dylib
