@@ -61,3 +61,6 @@
 [submodule "bundle/gitv"]
 	path = bundle/gitv
 	url = git@github.com:gregsexton/gitv.git
+[submodule "bundle/HiCursorWords"]
+	path = bundle/HiCursorWords
+	url = git@github.com:OrelSokolov/HiCursorWords.git
