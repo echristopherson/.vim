@@ -43,3 +43,6 @@
 [submodule "bundle/camelcasemotion"]
 	path = bundle/camelcasemotion
 	url = git@github.com:vim-scripts/camelcasemotion.git
+[submodule "bundle/cocoa.vim"]
+	path = bundle/cocoa.vim
+	url = git@github.com:msanders/cocoa.vim.git
