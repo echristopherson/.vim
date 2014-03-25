@@ -106,3 +106,6 @@
 [submodule "bundle/webapi-vim"]
 	path = bundle/webapi-vim
 	url = git@github.com:mattn/webapi-vim.git
+[submodule "bundle/nerdtree-ag"]
+	path = bundle/nerdtree-ag
+	url = git@github.com:taiansu/nerdtree-ag.git
