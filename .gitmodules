@@ -34,3 +34,6 @@
 [submodule "bundle/YouCompleteMe"]
 	path = bundle/YouCompleteMe
 	url = git@github.com:Valloric/YouCompleteMe.git
+[submodule "bundle/applescript.vim"]
+	path = bundle/applescript.vim
+	url = git@github.com:vim-scripts/applescript.vim.git
