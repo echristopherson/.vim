@@ -40,3 +40,6 @@
 [submodule "bundle/vim-bundler"]
 	path = bundle/vim-bundler
 	url = git@github.com:tpope/vim-bundler.git
+[submodule "bundle/camelcasemotion"]
+	path = bundle/camelcasemotion
+	url = git@github.com:vim-scripts/camelcasemotion.git
