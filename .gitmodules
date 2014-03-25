@@ -103,3 +103,6 @@
 [submodule "bundle/vim-unimpaired"]
 	path = bundle/vim-unimpaired
 	url = git@github.com:tpope/vim-unimpaired.git
+[submodule "bundle/webapi-vim"]
+	path = bundle/webapi-vim
+	url = git@github.com:mattn/webapi-vim.git
