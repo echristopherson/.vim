@@ -67,9 +67,6 @@
 [submodule "bundle/vim-indent-object"]
 	path = bundle/vim-indent-object
 	url = git@github.com:michaeljsmith/vim-indent-object.git
-[submodule "bundle/matchit"]
-	path = bundle/matchit
-	url = git@github.com:tmhedberg/matchit.git
 [submodule "bundle/vim-ragtag"]
 	path = bundle/vim-ragtag
 	url = git@github.com:tpope/vim-ragtag.git
@@ -115,3 +112,6 @@
 [submodule "bundle/mru"]
 	path = bundle/mru
 	url = git@github.com:yegappan/mru.git
+[submodule "bundle/matchit.zip"]
+	path = bundle/matchit.zip
+	url = git@github.com:vim-scripts/matchit.zip.git
