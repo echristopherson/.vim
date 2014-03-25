@@ -1,0 +1,10 @@
+vimwiki
+rubycomplete (part of vim-ruby)
+ansiesc
+globaloptions (maybe there's a reason why I had this installed before)
+conque_term
+dbext
+eclim
+easymotion
+tagbar (maybe replace taglist)
+

@@ -1,0 +1,10 @@
+cocoa
+align
+tabular
+abolish
+applescript
+hicursorwords
+indent_object
+textobj-rubyblock
+solarized
+taglist (maybe replace with tagbar)
