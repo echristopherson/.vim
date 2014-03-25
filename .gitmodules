@@ -109,3 +109,6 @@
 [submodule "bundle/nerdtree-ag"]
 	path = bundle/nerdtree-ag
 	url = git@github.com:taiansu/nerdtree-ag.git
+[submodule "bundle/tabular"]
+	path = bundle/tabular
+	url = git@github.com:godlygeek/tabular.git
