@@ -25,3 +25,6 @@
 [submodule "bundle/ultisnips"]
 	path = bundle/ultisnips
 	url = git@github.com:SirVer/ultisnips.git
+[submodule "bundle/vim-abolish"]
+	path = bundle/vim-abolish
+	url = git@github.com:tpope/vim-abolish.git
