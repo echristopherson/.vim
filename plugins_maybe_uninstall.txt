@@ -8,3 +8,4 @@ indent_object
 textobj-rubyblock
 solarized
 taglist (maybe replace with tagbar)
+buffergrep
