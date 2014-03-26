@@ -118,3 +118,6 @@
 [submodule "bundle/buffergrep"]
 	path = bundle/buffergrep
 	url = https://github.com/vim-scripts/buffergrep.git
+[submodule "bundle/tslime.vim"]
+	path = bundle/tslime.vim
+	url = https://github.com/vim-scripts/tslime.vim.git
