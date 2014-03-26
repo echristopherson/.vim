@@ -1,0 +1,368 @@
+" Keybindings for terminal vim; mostly to emulate gvim (somewhat)
+
+" Mapping cheat sheat:
+" map:  normal; visual; select; operator pending
+" nmap: normal
+" vmap: visual; select
+" omap: operator pending
+" xmap: visual
+" smap: select
+" map!: insert; command line
+" imap: insert
+" cmap: command line
+" lmap: insert; command line; lang arg
+" (normal mode = command mode)
+
+" Opt+arrow keys
+" Interestingly, these work as Cmd (meta)+arrows in rxvt on OS X (from
+" MacPorts), but I don't think they work on Windows. Another odd thing about
+" MacPorts rxvt is that it sets $TERM to xterm.
+" For some reason, <A-Esc> doesn't seem to work as a key code here.
+" I think these might be "application" keys (or whatever the terminal keyset
+" terminology is). They are sent when Vim is running by OS X Terminal, but not
+" iTerm 2.
+exec "set <F13>=\<Esc>\<Esc>O"
+map  <F13>A <A-Up>
+map! <F13>A <A-Up>
+map  <F13>B <A-Down>
+map! <F13>B <A-Down>
+map  <F13>C <A-Right>
+map! <F13>C <A-Right>
+map  <F13>D <A-Left>
+map! <F13>D <A-Left>
+
+" I think this is the other set of keys. OS X Terminal sends these in the
+" shell, and iTerm 2 seems to send them all the time.
+exec "set <F25>=\<Esc>\<Esc>["
+map  <F25>A <A-Up>
+map! <F25>A <A-Up>
+map  <F25>B <A-Down>
+map! <F25>B <A-Down>
+map  <F25>C <A-Right>
+map! <F25>C <A-Right>
+map  <F25>D <A-Left>
+map! <F25>D <A-Left>
+
+" xterm Cmd+arrows (Cmd = meta)
+" Unfortunately, even though OS X Terminal and xterm both claim to be xterm
+" variants, the codes generated for meta+arrows are different. By default,
+" xterm in OS X uses Cmd for meta; Cmd+arrows produces <Esc>[1;9A/B/C/D.
+" Interestingly, Opt+arrows produces <Esc>[A/B/C/D, just as in Terminal;
+" however, that doesn't seem to be recognized within vim. TODO.
+if $TERM == 'xterm' || $TERM == 'xterm-color'
+    exec "set <F14>=\<Esc>[1;9"
+    map  <F14>A <A-Up>
+    map! <F14>A <A-Up>
+    map  <F14>B <A-Down>
+    map! <F14>B <A-Down>
+    map  <F14>C <A-Right>
+    map! <F14>C <A-Right>
+    map  <F14>D <A-Left>
+    map! <F14>D <A-Left>
+endif
+
+" TODO: Consolidate these and make them consistent with GUI and xterm/Terminal
+if $TERM == 'rxvt'
+    " xterm/Terminal bindings.
+    " Map <C-Left/Right> to B/W in insert mode.
+    noremap  <C-Left>  B
+    inoremap <C-Left>  <C-o>B
+    "cnoremap  <C-Left>  <C-Left>
+    noremap  <C-Right> W
+    inoremap <C-Right> <C-o>W
+    "cnoremap  <C-Right> <C-Right>
+
+    " Map <C-Up> to go to the first non-whitespace character on the line, and
+    " <C-Down> to go to the end.
+    noremap  <C-Up>   ^
+    inoremap <C-Up>   <C-o>^
+    "cnoremap  <C-Up>   <Home>
+    vnoremap <C-Up>   ^
+
+    exec "set <F20>=\<Esc>[a"
+    map  <F20> <S-C-Up>
+    map! <F20> <S-C-Up>
+    exec "set <F21>=\<Esc>[b"
+    map  <F21> <S-C-Down>
+    map! <F21> <S-C-Down>
+    exec "set <F22>=\<Esc>[c"
+    map  <F22> <S-C-Right>
+    map! <F22> <S-C-Right>
+    exec "set <F23>=\<Esc>[d"
+    map  <F23> <S-C-Left>
+    map! <F23> <S-C-Left>
+
+    noremap  <C-Down> <End>
+    noremap! <C-Down> <End>
+    "cnoremap <C-Up>   <Home>
+    "cnoremap <C-Down> <End>
+
+    " Ctrl+Left/Right - move CamelCase-wordwise
+    map  <S-C-Right> <Plug>CamelCaseMotion_w
+    imap <S-C-Right> <C-o><S-C-Right>
+    map  <S-C-Left>  <Plug>CamelCaseMotion_b
+    imap <S-C-Left>  <C-o><S-C-Left>
+    
+    " TODO: Make CamelCase-aware forward/backward delete/backspace
+endif
+
+" Opt+Delete in OS X Terminal
+exec "set <F18>=\<Esc>\<C-?>"
+map  <F18> <A-Backspace>
+map! <F18> <A-Backspace>
+
+" Opt+Forward Delete in OS X Terminal
+" I can't get Alt+Delete to do anything in rxvt
+exec "set <F24>=\<Esc>("
+map  <F24> <A-Delete>
+map! <F24> <A-Delete>
+
+" Home and End keys
+" By default, in OS X Terminal you have to use Shift with these (like with
+" Page Up/Page Down, but those seem to be recognized automatically by vim).
+exec "set <F15>=\<Esc>[H"
+map  <F15> <Home>
+map! <F15> <Home>
+exec "set <F16>=\<Esc>[F"
+map  <F16> <End>
+map! <F16> <End>
+
+" Page Up key
+" Since we set a key code (F17) for <Esc>[5, vim stopped recognizing Page Up
+" (<Esc>[5~). Here we restore it. Page Down seems unaffected.
+map  <F17>~ <PageUp>
+map! <F17>~ <PageUp>
+
+" Ctrl+arrows
+" TODO
+if $TERM == 'rxvt'
+    " TODO
+    
+    " rxvt keys (vim uses application mode):
+    "                                    -------Windows-----  -----MacPorts------
+    "  Up:                               ANSI    Application  ANSI    Application
+    "   plain:                           ^[[A    ^[OA         ^[[A    ^[OA         (same)
+    "   shift/shift+ctrl:                ^[[a    ^[[a         ^[[a    ^[[a         (same)
+    "   ctrl:                            ^[Oa    ^[Oa         ^[Oa    ^[Oa         (same)
+    "   alt:                             (none)  (none)       ^[^[[A  ^[^[OA
+    "   ctrl+alt:                        ^[[A    ^[OA         ^[^[Oa  ^[^[Oa
+    "   shift+alt:                       (none)  (none)       ^[^[[a  ^[^[[a
+    "   shift+ctrl+alt:                  ^[[a    ^[[a         ^[^[[a  ^[^[[a
+    "
+    " TODO: Is there a way to get rxvt for Windows to send something for Alt+arrows?
+    "
+    " Windows:
+    "  Backspace: ^H    (TODO: This is mapped to word left. I suppose I could make rxvt send ^?.)
+    "  Delete:    ^[[3~
+    "
+    " MacPorts:
+    "  Backspace: ^?
+    "  Delete:    ^[[3~
+
+    " Arrows in rxvt
+    " I think the only reason we need to map these is that they use <F19>;
+    " the only reason we need to define <F19> is that the Ctrl+arrows use it.
+    exec "set <F19>=\<Esc>O"
+    map  <F19>A <Up>
+    map! <F19>A <Up>
+    map  <F19>B <Down>
+    map! <F19>B <Down>
+    map  <F19>C <Right>
+    map! <F19>C <Right>
+    map  <F19>D <Left>
+    map! <F19>D <Left>
+    
+    " Ctrl+arrows in rxvt
+    map  <F19>a <C-Up>
+    map! <F19>a <C-Up>
+    map  <F19>b <C-Down>
+    map! <F19>b <C-Down>
+    map  <F19>c <C-Right>
+    map! <F19>c <C-Right>
+    map  <F19>d <C-Left>
+    map! <F19>d <C-Left>
+else
+    " Ctrl+arrows in Terminal
+    exec "set <F17>=\<Esc>[5"
+    map  <F17>A <C-Up>
+    map! <F17>A <C-Up>
+    map  <F17>B <C-Down>
+    map! <F17>B <C-Down>
+    map  <F17>C <C-Right>
+    map! <F17>C <C-Right>
+    map  <F17>D <C-Left>
+    map! <F17>D <C-Left>
+endif
+
+" See /Applications/MacVim.app/Contents/Resources/vim/runtime/macmap.vim (from
+" which many of the following are taken); and menu.vim in the same directory.
+
+" Since these all have native (Cmd-modified) versions in gvim, don't bother
+" defining them there.
+" A utility function to help cover our bases when mapping.
+" The mappings used are patterned after those used in
+" </Applications/MacVim.app/Contents/Resources/vim/runtime/macmap.vim>.
+"
+" Example of use:
+"   call NvicoMapMeta('n', ':new<CR>', 1)
+" is equivalent to:
+"   exec "set <A-n>=\<Esc>n"
+"   nnoremap <special> <Esc>n :new<CR>
+"   vmap <special> <Esc>n <Esc><Esc>ngv
+"   imap <special> <Esc>n <C-o><Esc>n
+"   cmap <special> <Esc>n <C-c><Esc>n
+"   omap <special> <Esc>n <Esc><Esc>n
+function! NvicoMapMeta(key, cmd, add_gv)
+    " TODO: Make this detect whether key is something that has an Alt
+    " equivalent.
+    let l:keycode = "<A-" . a:key . ">"
+
+    let l:set_line = "set " . l:keycode . "=\<Esc>" . a:key
+
+    let l:nmap_line = 'nmap <silent> <special> ' . l:keycode . ' ' . a:cmd
+    let l:vmap_line = 'vmap <silent> <special> ' . l:keycode . ' <Esc>' . l:keycode
+    if(a:add_gv)
+        let l:vmap_line.='gv'
+    endif
+    let l:imap_line = 'imap <silent> <special> ' . l:keycode . ' <C-o>' . l:keycode
+    let l:cmap_line = 'cmap <special> ' . l:keycode . ' <C-c>' . l:keycode
+    let l:omap_line = 'omap <silent> <special> ' . l:keycode . ' <Esc>' . l:keycode
+
+    "echo l:set_line
+    "echo l:nmap_line
+    "echo l:vmap_line
+    "echo l:imap_line
+    "echo l:cmap_line
+    "echo l:omap_line
+    "echo
+
+    exec l:set_line
+    exec l:nmap_line
+    exec l:vmap_line
+    exec l:imap_line
+    exec l:cmap_line
+    exec l:omap_line
+endfunction
+
+" The following was a copy of the <D-n> binding in runtime/macmap.vim; but it
+" turns out that binding has always been swallowed by a binding (which must be
+" set at the Cocoa level) making Cmd-N open a new toplevel window.
+"" This was :confirm enew, but it makes more sense to me to use :new.
+"call NvicoMapMeta('n', ':new<CR>', 1)
+
+" No equivalent to this in standard MacVim; but I've mapped it there too.
+call NvicoMapMeta('N', ':new<CR>', 1)
+
+" Changed from MacVim default, since terminal vim doesn't have a browser
+call NvicoMapMeta('o', ':split %:p:h<CR>', 1)
+
+" Changed from MacVim default, since I think just closing the window/tab makes
+" more sense than replacing it with a blank file.
+call NvicoMapMeta('w', ':confirm close<CR>', 1)
+
+" Changed from MacVim default, since that used browse, which isn't available
+" outside of the GUI.
+call NvicoMapMeta('s', ':confirm w<CR>', 1)
+
+" Changed from MacVim default, since terminal vim doesn't have a browser
+" TODO: This is silent, so you can't tell it's waiting for input
+call NvicoMapMeta('S', ':confirm saveas ', 1)
+
+call NvicoMapMeta('z', 'u', 1)
+
+call NvicoMapMeta('Z', '<C-r>', 1)
+
+exec "set <A-x>=\<Esc>x"
+vnoremap <special> <A-x> "+x
+
+exec "set <A-c>=\<Esc>c"
+vnoremap <special> <A-c> "+y
+" TODO: C-y doesn't seem to do anything on the command line.
+cnoremap <special> <A-c> <C-y>
+
+exec "set <A-v>=\<Esc>v"
+nnoremap <silent> <special> <A-v> "+gP
+cnoremap <special> <A-v> <C-r>+
+execute 'vnoremap <silent> <script> <special> <A-v>' paste#paste_cmd['v']
+execute 'inoremap <silent> <script> <special> <A-v>' paste#paste_cmd['i']
+
+" Minor change from MacVim default
+call NvicoMapMeta('a', ':if &slm != "" <Bar> exe ":norm gggH<C-o>G" <Bar> else <Bar> exe ":norm ggVG" <Bar> endif<CR>', 0)
+
+call NvicoMapMeta('f', '/', 0)
+
+call NvicoMapMeta('g', 'n', 0)
+
+call NvicoMapMeta('G', 'N', 0)
+
+" Not quite identical to MacVim default
+call NvicoMapMeta('q', ':confirm qa<CR>', 0)
+
+" Changed from MacVim default
+" This closes all files but leaves open a window on a blank file.
+" Helper functions
+function! EnsureOnlyWindow()
+    if winnr() == 1 && winnr() == winnr('$')
+        return
+    else
+        confirm only
+    endif
+endfunction
+
+function! EnsureOnlyTab()
+    if tabpagenr() == 1 && tabpagenr() == tabpagenr('$')
+        return
+    else
+        confirm tabonly
+    endif
+endfunction
+
+" Changed from MacVim default: In MacVim, this closes a whole Mac window and
+" all the buffers inside it. Instead I'm going to have something that opens a
+" blank buffer in a window and closes all other buffers and tabs. TODO: We may
+" or may not want it to actually close the buffers.
+call NvicoMapMeta('W', ':confirm enew <Bar> call EnsureOnlyWindow() <Bar> call EnsureOnlyTab() <CR>', 0)
+
+" Switch tabs with Opt+braces (like Cmd+braces for Aqua apps)
+call NvicoMapMeta('{', ':tabN<CR>', 0)
+
+call NvicoMapMeta('}', ':tabn<CR>', 0)
+
+call NvicoMapMeta('t', ':tabnew<CR>', 0)
+
+" Changed from MacVim default, since terminal vim doesn't have a browser
+call NvicoMapMeta('T', ':tab split %:p:h<CR>', 0)
+
+" Changed from MacVim default: Cmd+b in MacVim calls :make; I'm using
+" :make! to prevent it from jumping to the first error/warning/etc.
+call NvicoMapMeta('b', ':make!<CR>', 1)
+
+" Changed from MacVim default: I'm using Opt+l and Opt+Shift+l for cursor
+" movements. How about Opt+e for "error list"?
+call NvicoMapMeta('e', ':cl<CR>', 1)
+
+" TODO: It doesn't seem possible to make OS X Terminal send sequences for
+" Opt+Ctrl+arrows separate from those for Opt+arrows, so we need to change
+" these from the MacVim bindings.
+" TODO: How to change these in gvim? For now I will just add Cmd+Ctrl+N/P to gvim.
+" Update: gvim doesn't want to accept those bindings -- at least on some
+" systems. Right now I'm looking at gvim on my Windows work PC, which doesn't
+" accept them, but I think my Ubuntu machines do.
+call NvicoMapMeta("\<C-n>", ':cn<CR>', 0)
+
+call NvicoMapMeta("\<C-p>", ':cN<CR>', 0)
+
+" I can't think of any good values for these, but I probably won't use them
+" much.
+"call NvicoMapMeta('', ':cold<CR>', 1)
+"call NvicoMapMeta('', ':cnew<CR>', 1)
+
+" Opt+Return in OS X Terminal
+exec "set <A-CR>=\<Esc>\<CR>"
+
+" Explicitly set DEL as backspace character. For some reason this doesn't get
+" set correctly in xterm, the Xquartz version at least -- according to :h
+" backspace-delete, it should get the value from termcap/terminfo and stty.
+" stty does show it to be ^?, so maybe termcap/terminfo takes precedence.
+noremap <C-?> <BS>
+noremap! <C-?> <BS>

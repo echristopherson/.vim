@@ -1,0 +1,467 @@
+""" Key bindings """
+
+" Disable MacVim default GUI cursor key bindings, to make the GUI bindings
+" work the same as the ones I've set for the terminal. Not sure why this
+" setting needs to go in .vimrc and not .gvimrc, but it does. Maybe .vimrc
+" gets read beforer .gvimrc. See $VIM/gvimrc.
+let macvim_skip_cmd_opt_movement = 1
+
+" TODO: Reenable macvim_hig_shift_movement eventually. For now I'll just code
+" Mac cursor key bindings myself.
+" TODO: Make a function to go to first nonblank character on first keypress,
+" and first character on second.
+" TODO: Set Opt+Up/Down to beginning/end of paragraph (or just use
+" macvim_skip_cmd_opt_movement).
+" TODO: Make Opt+Right go to end of line when on last word.
+noremap  <D-Left> <Home>
+noremap! <D-Left> <Home>
+noremap  <D-Right> <End>
+noremap! <D-Right> <End>
+
+" Turn various timeout types on or off
+set timeout " time out on :mappings and key codes
+set ttimeout " time out on key codes
+" Key sequence timeout in milliseconds
+set timeoutlen=1000
+set ttimeoutlen=100
+
+" Number of milliseconds to wait before firing CursorHold and updating swap
+" file. This is also used by the TagList plugin as the timeout for
+" highlighting the tag where the cursor is. TODO: Hack TagList to separate the
+" two. I don't want to be forcing swap updates too often.
+" Default is 4000.
+"set updatetime=500
+
+" Map \ as <Leader>
+let mapleader='\'
+
+" Help in a new tab instead of a window
+noremap  <silent> <F1> :tab help<CR>
+inoremap <silent> <F1> <C-o>:tab help<CR>
+
+" Toggle enable/disable custom keymap in insert mode and search command line
+" TODO: See if this does anything different from CTRL-^ in insert mode.
+let g:alt_iminsert = 0
+let g:alt_imsearch = 0
+function! ToggleKeymap()
+    if &iminsert == 0
+        let &iminsert = g:alt_iminsert
+        let g:alt_iminsert = 0
+    else
+        let g:alt_iminsert = &iminsert
+        set iminsert=0
+    endif
+
+    if &imsearch == 0
+        let &imsearch = g:alt_imsearch
+        let g:alt_imsearch = 0
+    else
+        let g:alt_imsearch = &imsearch
+        set imsearch=0
+    endif
+endfunction
+
+noremap <silent> <F10> :call ToggleKeymap()<CR>
+inoremap <silent> <F10> <C-o>:call ToggleKeymap()<CR>
+
+" Turn off highlighting
+noremap  <silent> <F12> :nohl<CR>
+inoremap <silent> <F12> <C-o><F12>
+
+" Allow shift+arrow to start visual mode. Also see $VIM/gvimrc.
+" let macvim_hig_shift_movement = 1
+
+" A little function from Raimondi on Freenode #vim; this automatically takes
+" care of binding to <Esc> or <A-> depending on the vim type.
+" I just found out it's also possible to use something like the following:
+"   set <M-a>=<Esc>a
+" But I don't know a way to set M-... to <Esc>... across the board.
+" TODO: Remove. This function is becoming obsolete in my config.
+function! MapMeta(cmd, lhs, rhs)
+    "if has('gui_running')
+    let l:lhs_has_brackets=0
+    if match(a:lhs, '^<.\+>') == 0
+        let l:lhs = substitute(a:lhs, '^<', '', '')
+        let l:lhs_has_brackets=1
+    else
+        let l:lhs = a:lhs
+    endif
+    let l:cmd_line = a:cmd . ' <A-' . l:lhs
+    if !l:lhs_has_brackets
+        let l:cmd_line.='>'
+    endif
+    let l:cmd_line.=' ' . a:rhs
+    "echo l:cmd_line
+    exec l:cmd_line
+endfunction
+" Example usage:
+"call MapMeta('map', '<Left>', 'w')
+
+" Create a key code for meta+supplied character, if in a terminal. (Not
+" necessary in the GUI.)
+function! MakeMetaCharacter(char)
+    if !has('gui_running')
+        exec "set <A-" . a:char . ">=\<Esc>" . a:char
+    endif
+endfunction
+
+" Set pastetoggle key. This allows us to paste code into terminal vim without
+" vim autoindenting it (in addition to its original intendation).
+" See <http://vim.wikia.com/wiki/VimTip906>.
+set pastetoggle=<F2>
+
+" Mapping cheat sheat:
+" map:  normal; visual; select; operator pending
+" nmap: normal
+" vmap: visual; select
+" omap: operator pending
+" xmap: visual
+" smap: select
+" map!: insert; command line
+" imap: insert
+" cmap: command line
+" lmap: insert; command line; lang arg
+" (normal mode = command mode)
+
+" Set function key to turn off auto-indenting. This is disabled because I'd
+" prefer something that can also turn it back on. See
+" <http://vim.wikia.com/wiki/VimTip330>.
+"nnoremap <F8> :setl noai nocin nosi inde=<CR>
+
+" Ctrl+arrows
+
+" NOTE: Strange: by default, the <C-Left/Right> bindings cover more ground in
+" normal mode than in insert mode, e.g. the string "<C-Left>" is treated as
+" five words in normal mode but only one in insert mode! In normal mode, w/b
+" move like <C-Left/Right> do in insert mode; B/W moves like <C-Left/Right> do
+" in normal mode.
+
+" For OS X Terminal and gvim (and hopefully xterm):
+" Opt+arrows
+" Note that if we specify <silent> for c*map, the command line won't reflect
+" movement of the cursor or deletion of words.
+noremap  <A-Left> B
+inoremap <A-Left> <C-o>B
+cnoremap <A-Left> <C-Left>
+
+noremap  <A-Right> W
+inoremap <A-Right> <C-o>W
+cnoremap <A-Right> <C-Right>
+
+noremap  <A-Up> ^
+inoremap <A-Up> <C-o>^
+cnoremap <A-Up> <Home>
+
+noremap  <A-Down> $
+inoremap <A-Down> <C-o>$
+cnoremap <A-Down> <End>
+
+" Ctrl+Left/Right - move CamelCase-wordwise
+map  <silent> <C-Right> <Plug>CamelCaseMotion_w
+imap <silent> <C-Right> <C-o><C-Right>
+map  <silent> <C-Left>  <Plug>CamelCaseMotion_b
+imap <silent> <C-Left>  <C-o><C-Left>
+
+" Ctrl+Up/Down - like Opt+Up/Down
+" TODO: Maybe change this to Page Up/Down, as per Mac standard (?)
+map  <C-Up>   <A-Up>
+map! <C-Up>   <A-Up>
+map  <C-Down> <A-Down>
+map! <C-Down> <A-Down>
+
+" Opt+Backspace (Delete)
+" I'd like to have Ctrl+Backspace and Delete too, but OS X Terminal doesn't
+" allow you to map Backspace combinations.
+" TODO: This doesn't delete across stuff like parentheses and operators; dB
+" does. I would like it to work like dB eventually.
+inoremap <A-Backspace> <C-w>
+cnoremap <A-Backspace> <C-w>
+
+" CamelCase-wise previous word deletion
+function! IsDirectlyAfterLeadingWhitespace()
+    if col('.') == 1
+        return 0
+    else
+        let l:col = col('.') - 2
+        let l:line_beginning = getline(line('.'))[0 : l:col]
+        let l:result = (match(l:line_beginning, '^\s\+$') != -1)
+        return l:result
+    endif
+endfunction
+
+" Thanks in part to jamessan on #vim
+" Save original <C-w>
+inoremap <C-\><C-w> <C-w>
+
+" TODO: Get this working again. I think my Cscope bindings may step on the use
+" of <C-\> here.
+imap <expr> <C-w> 
+\ (virtcol('.') == 1 ?
+    \ '<Backspace>' :
+    \ (IsDirectlyAfterLeadingWhitespace() ?
+        \ '<C-\><C-w>' :
+        \ (virtcol('.') == virtcol('$') ?
+            \ ' <C-\><C-n>dbxa' :
+            \ '<C-o>db'
+        \ )
+    \ )
+\ )
+
+imap <C-Backspace> <C-w>
+cmap <C-Backspace> <C-w>
+
+" Opt+Delete (Fn+Delete)
+" Unfortunately Opt+Fn+Delete doesn't send <Esc><Delete> by default in OS X
+" Terminal; see .vimrc-keys-term for binding to handle that.
+" Not sure if we need this in normal mode (although <Delete> is enabled
+" there).
+noremap  <A-Delete> dW
+inoremap <A-Delete> <C-o>dW
+cnoremap <A-Delete> <Delete>
+
+" Map ' to : in normal (command), visual, select, and operator pending modes
+" Ordinarily, ' is used for jumping to marks. However, ` is defined with the
+" same function, so we can use that. It might make sense to use ` for :, since
+" it's right under Esc.
+" NOTE: I just realized there are some default bindings using ' as first
+" character. It doesn't look like they're ones I'm likely to use, though.
+" (See :help index.txt)
+noremap ' :
+
+" Run xmp -- evaluate selected Ruby code and put #=> value at the ends of
+" lines.
+" TODO: Use built-in Ruby mode?
+noremap <silent> <F2> :!ruby -r ~/Scripts/xmp/xmp -n -e 'xmp($_, "\%l\t\t\# -> \%r\n")'<CR>
+
+" Allow selection of pasted text with <Leader>gv, the way old selection is
+" reselected with gv.
+" From <http://vim.wikia.com/wiki/Selecting_your_pasted_text>.
+nnoremap <expr> <Leader>gv '`[' . strpart(getregtype(), 0, 1) . '`]'
+
+" Map \ for global/selection search and replace; after replacement is done,
+" move cursor back to original location with ``.
+" TODO: undoing afterward puts the cursor back to the location of the last
+" change. Find some way to fix this.
+nnoremap \\ :%s//g<Bar>norm!``<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
+" In visual mode, '<,'> should be inserted automatically.
+vnoremap \\ :s//g<Bar>norm!``<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
+
+" Map Opt+Return to send Return without continuing comments on the next line.
+" Also map Shift+Return the same; for some reason gvim in Windows doesn't run
+" the mapping on Alt+Return, even though it does recognize it when I preface
+" it with <C-V>.
+" Raimondi helped fix this so it wouldn't return to the beginning of the line.
+inoremap <silent> <A-CR> <C-o>:let b:fo=&fo<Bar>set fo-=r<CR><CR>x<Backspace><C-o>:let &fo=b:fo<Bar>normal! gi<CR>
+inoremap <silent> <S-CR> <C-o>:let b:fo=&fo<Bar>set fo-=r<CR><CR>x<Backspace><C-o>:let &fo=b:fo<Bar>normal gi<CR>
+cnoremap <A-CR> <CR>
+cnoremap <S-CR> <CR>
+
+" CamelCase word motion
+" -- see <http://vim.wikia.com/wiki/Moving_through_camel_case_words>
+"    and <http://www.vim.org/scripts/script.php?script_id=1905>
+" I used to have these mapped to the standard w/b/e, but now I'd rather use w/b/e for their normal uses and
+" ,w/,b/,e or Ctrl+arrows or Alt+h/j for CamelCaseMotion. Unfortunately, if
+" you map *anything* to any <Plug>CamelCaseMotion_* function, the plugin won't
+" define ,w/,b/,e. Since I have several bindings to that plugin's functions, I
+" need to define those manually here.
+map <silent> ,w <Plug>CamelCaseMotion_w
+map <silent> ,b <Plug>CamelCaseMotion_b
+map <silent> ,e <Plug>CamelCaseMotion_e
+
+" Additional cursor movement goodness
+" Opt+j/k - work like Ctrl+Left/Right
+call MakeMetaCharacter('j')
+call MakeMetaCharacter('k')
+map  <A-j> <C-Left>
+map! <A-j> <C-Left>
+map  <A-k> <C-Right>
+map! <A-k> <C-Right>
+" Opt+h/l - work like Opt+Left/Right
+call MakeMetaCharacter('h')
+call MakeMetaCharacter('l')
+map  <A-h> <A-Left>
+map! <A-h> <A-Left>
+map  <A-l> <A-Right>
+map! <A-l> <A-Right>
+" Opt+u/i - work like Opt+Up/Down
+call MakeMetaCharacter('u')
+call MakeMetaCharacter('i')
+map  <A-u> <A-Up>
+map! <A-u> <A-Up>
+map  <A-i> <A-Down>
+map! <A-i> <A-Down>
+" Shift+Opt+hjkl - work like hjkl in normal mode
+call MakeMetaCharacter('H')
+call MakeMetaCharacter('J')
+call MakeMetaCharacter('K')
+call MakeMetaCharacter('L')
+map  <A-H> <Left>
+map! <A-H> <Left>
+map  <A-J> <Down>
+map! <A-J> <Down>
+map  <A-K> <Up>
+map! <A-K> <Up>
+map  <A-L> <Right>
+map! <A-L> <Right>
+
+" Ctrl+Home and End
+if !has('gui_running')
+    exec "set <C-Home>=\<Esc>[7^"
+    exec "set <C-End>=\<Esc>[8^"
+endif
+map  <C-Home> gg
+imap <C-Home> <C-o>gg
+cmap <C-Home> <Home>
+map  <C-End> G$
+imap <C-End> <C-o>G<C-o>$
+cmap <C-End> <End>
+
+" A very nice sequence Raimondi gave me, which (when the cursor is on a brace
+" or other matchable delimiter) deletes the braces (and the lines they're on)
+" and decreases the indent of what they used to contain. Clobbers marks a and
+" A.
+" TODO: Make this work with things like Ruby and Objective-C block
+" delimiters. Currently this only detects (, [, or {.
+function! Unblockify()
+    let l:is_on_last_line = 0
+    let l:current_char = getline('.')[col('.')-1]
+    let l:is_beginning_block_delim = l:current_char =~ '[([{]'
+    if ! l:is_beginning_block_delim && !(l:current_char =~ '[)\]}]')
+        " TODO: Find beginning of current block and use that as start
+        return
+    endif
+
+    " Set mark A to beginning position
+    normal! mA
+    " Go to end delimiter, if not already there
+    if ! l:is_beginning_block_delim
+        normal! %
+    endif
+    " Set mark a to beginning delimiter position
+    normal! ma
+    " Go to end delimiter
+    normal! %
+    " If this is the last line, dd will cause the cursor to move up
+    if line('.') == line('$')
+        let l:is_on_last_line = 1
+    endif
+    " Delete end delimiter
+    normal! dd
+    " Move up, if necessary
+    if ! l:is_on_last_line
+        normal! k
+    endif
+    " Select contents of delimiters
+    normal! V`aj
+    " Deindent
+    normal! <
+    " Delete beginning delimiter
+    normal! kdd
+    " Restore position
+    if ! l:is_beginning_block_delim
+        if l:is_on_last_line
+            normal! G
+        else
+            normal! `A
+        endif
+    endif
+endfunction
+
+call MakeMetaCharacter('%')
+noremap <silent> <A-%> :call Unblockify()<CR>
+
+" [\ and ]\ switch buffers
+" TODO: Make these ignore NERDTree, quickfix, dbext, and other annoying
+" buffers.
+nnoremap <silent> [\ :bN<CR>
+nnoremap <silent> ]\ :bn<CR>
+" \n toggles NERD Tree
+nnoremap <silent> <Leader>n :NERDTreeToggle<CR>
+
+" Find number of listed buffers
+function! CountListedBuffers()
+  return len(filter(range(1, bufnr("$")), 'buflisted(v:val)'))
+endfunction
+
+" TODO (next two functions): Catch when user cancels and act accordingly
+
+" Close buffer but keep window open
+function! WipeOutBufferOnly()
+    if CountListedBuffers() != 1
+        if bufexists(0) && buflisted(0) " alternate buffer exists and is listed
+            buffer #
+            confirm bwipeout #
+        else
+            bprevious
+            confirm bwipeout #
+        endif
+    else " this is the only buffer
+        enew
+        confirm bwipeout #
+    endif
+endfunction
+
+nnoremap <silent> <Leader>q :call WipeOutBufferOnly()<CR>
+
+" Close buffer and current window
+" TODO: Catch last open window
+function! WipeOutBufferAndClose()
+    bprevious
+    confirm bwipeout #
+    close
+endfunction
+
+" Unfortunately <D-w> seems to be set in Cocoa, and is unable to occur in a
+" binding after another character.
+nnoremap <silent> <Leader>Q :call WipeOutBufferAndClose()<CR>
+
+" Preserve functionality of `,` while allowing it to be used as a prefix char
+noremap ,, ,
+noremap <Leader>, ,
+noremap <Leader>; ,
+
+" Change/delete selected text without putting it in a register
+noremap ,c "_c
+noremap ,C "_C
+noremap ,d "_d
+noremap ,D "_D
+noremap ,r "_r
+noremap ,R "_R
+noremap ,s "_s
+noremap ,S "_Ó
+noremap ,x "_x
+noremap ,X "_X
+
+" Delete selected text without putting it in a register; then paste over it
+vnoremap ,p "_dP
+vnoremap ,P "_dP
+
+" Send last-yanked text to Clipper, assuming it's running (port 8377)
+" NOTE that this doesn't yet handle Unicode correctly.
+" TODO: In the terminal, the cursor disappears if I use <silent> here.
+nnoremap <leader>y :call system('nc localhost 8377', @0)<CR>
+
+" ZoomWin - map <C-w><C-o> to function like <C-w>o (which zooms/unzooms
+" window)
+nmap <C-w><C-o> <C-w>o
+
+" Open new split with blank buffer
+" TODO: Did I mean to make these non-n maps use Cmd+*lower-case* n?
+nnoremap <special> <D-N> :new<CR>
+vmap <special> <D-n> <Esc><D-n>gv
+imap <special> <D-n> <C-O><D-n>
+cmap <special> <D-n> <C-C><D-n>
+omap <special> <D-n> <Esc><D-n>
+
+
+
+
+" Source terminal-specific key bindings
+" TODO: Actually, "terminal-specific" isn't valid anymore, since I'm going to
+" use these same keybindings in Linux and Windows terminal vim and gvim. As it
+" stands, the dichotomy is between MacVim GUI and everything else.
+" TODO: The -term file uses terminal-specific stuff anyway. Must fix that.
+if !( has('gui_running') && has('gui_macvim') )
+    let b:this_dir = expand('<sfile>:p:h')
+    call SourceIfReadable(b:this_dir . '/vimrc-keys-term')
+endif
