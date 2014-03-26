@@ -1,0 +1,15 @@
+profile start /Users/eric/vim-ruby-startup-profiling.txt
+profile file /Applications/MacVim.app/Contents/Resources/vim/runtime/autoload/rubycomplete.vim
+profile file /Applications/MacVim.app/Contents/Resources/vim/runtime/compiler/eruby.vim
+profile file /Applications/MacVim.app/Contents/Resources/vim/runtime/compiler/ruby.vim
+profile file /Applications/MacVim.app/Contents/Resources/vim/runtime/compiler/rubyunit.vim
+profile file /Applications/MacVim.app/Contents/Resources/vim/runtime/doc/if_ruby.txt
+profile file /Applications/MacVim.app/Contents/Resources/vim/runtime/ftplugin/eruby.vim
+profile file /Applications/MacVim.app/Contents/Resources/vim/runtime/ftplugin/ruby.vim
+profile file /Applications/MacVim.app/Contents/Resources/vim/runtime/indent/eruby.vim
+profile file /Applications/MacVim.app/Contents/Resources/vim/runtime/indent/ruby.vim
+profile file /Applications/MacVim.app/Contents/Resources/vim/runtime/syntax/eruby.vim
+profile file /Applications/MacVim.app/Contents/Resources/vim/runtime/syntax/ruby.vim
+profile file /Users/eric/.vim/after/ftplugin/ruby.vim
+profile file /Users/eric/.vim/after/ftplugin/ruby_snippets.vim
+profile file /Users/eric/.vim/snippets/ruby.snippets
