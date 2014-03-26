@@ -9,3 +9,5 @@ textobj-rubyblock
 solarized
 taglist (maybe replace with tagbar)
 buffergrep
+tslime.vim
+renumber.vim
