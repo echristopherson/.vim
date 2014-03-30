@@ -219,15 +219,6 @@ noremap  <A-Delete> dW
 inoremap <A-Delete> <C-o>dW
 cnoremap <A-Delete> <Delete>
 
-" Map ' to : in normal (command), visual, select, and operator pending modes
-" Ordinarily, ' is used for jumping to marks. However, ` is defined with the
-" same function, so we can use that. It might make sense to use ` for :, since
-" it's right under Esc.
-" NOTE: I just realized there are some default bindings using ' as first
-" character. It doesn't look like they're ones I'm likely to use, though.
-" (See :help index.txt)
-noremap ' :
-
 " Run xmp -- evaluate selected Ruby code and put #=> value at the ends of
 " lines.
 " TODO: Use built-in Ruby mode?
