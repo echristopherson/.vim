@@ -427,14 +427,21 @@ noremap ,d "_d
 noremap ,D "_D
 noremap ,r "_r
 noremap ,R "_R
-noremap ,s "_s
-noremap ,S "_Ó
+" I never really use the default s or S, and I've decided to use S for
+" surround to match its visual mapping. Besides, now that I've installed
+" easymotion, I'd like to use ,s for its bidirectional f/F-like action.
+"noremap ,s "_s
+noremap ,S ys
 noremap ,x "_x
 noremap ,X "_X
 
 " Delete selected text without putting it in a register; then paste over it
 vnoremap ,p "_dP
 vnoremap ,P "_dP
+
+" Surround
+nmap S ys
+nmap SS yss
 
 " Send last-yanked text to Clipper, assuming it's running (port 8377)
 " NOTE that this doesn't yet handle Unicode correctly.
