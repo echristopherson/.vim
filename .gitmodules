@@ -124,3 +124,6 @@
 [submodule "bundle/renumber.vim"]
 	path = bundle/renumber.vim
 	url = https://github.com/vim-scripts/renumber.vim.git
+[submodule "bundle/vim-easymotion"]
+	path = bundle/vim-easymotion
+	url = https://github.com/Lokaltog/vim-easymotion.git

@@ -453,6 +453,9 @@ imap <special> <D-n> <C-O><D-n>
 cmap <special> <D-n> <C-C><D-n>
 omap <special> <D-n> <Esc><D-n>
 
+" EasyMotion
+let g:EasyMotion_do_mapping = 1
+map , <Plug>(easymotion-prefix)
 
 
 
