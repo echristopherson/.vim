@@ -457,9 +457,31 @@ let g:EasyMotion_do_mapping = 1
 " I'd like to use , for easymotion-prefix, but I already have a few things
 " (e.g. ,w) that it conflicts with.
 map <Leader>e <Plug>(easymotion-prefix)
-map ,s <Leader>es
 
+" These are taken by CamelCaseMotion. Perhaps I don't really need that plugin
+" anymore (or I could just use some of my other mappings for it, like
+" Ctrl+arrows or Meta+j/k). But for now I can just use <Leader>ew/b/e for
+" easymotion.
+" TODO: I see now that CamelCaseMotion doesn't have an equivalent for ge. We
+" might want to implement that and send it to Ingo.
+"map ,w  <Plug>(easymotion-w)
+"map ,b  <Plug>(easymotion-b)
+"map ,e  <Plug>(easymotion-e)
 
+map ,f  <Plug>(easymotion-f)
+map ,F  <Plug>(easymotion-F)
+map ,t  <Plug>(easymotion-t)
+map ,T  <Plug>(easymotion-T)
+map ,W  <Plug>(easymotion-W)
+map ,B  <Plug>(easymotion-B)
+map ,E  <Plug>(easymotion-E)
+map ,ge <Plug>(easymotion-ge)
+map ,gE <Plug>(easymotion-gE)
+map ,j  <Plug>(easymotion-j)
+map ,k  <Plug>(easymotion-k)
+map ,n  <Plug>(easymotion-n)
+map ,N  <Plug>(easymotion-N)
+map ,s  <Plug>(easymotion-s)
 
 " Source terminal-specific key bindings
 " TODO: Actually, "terminal-specific" isn't valid anymore, since I'm going to
