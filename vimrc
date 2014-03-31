@@ -19,6 +19,7 @@ call add(g:pathogen_disabled, 'ultisnips')
 call add(g:pathogen_disabled, 'Nexus')
 call add(g:pathogen_disabled, 'vim-fanfingtastic')
 call add(g:pathogen_disabled, 'vim-KWEasy')
+call add(g:pathogen_disabled, 'tslime.vim')
 
 
 runtime bundle/vim-pathogen/autoload/pathogen.vim
