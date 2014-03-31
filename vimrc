@@ -15,6 +15,11 @@ call add(g:pathogen_disabled, 'HiCursorWords')
 call add(g:pathogen_disabled, 'vim-colors-solarized')
 call add(g:pathogen_disabled, 'YouCompleteMe')
 call add(g:pathogen_disabled, 'ultisnips')
+" dahu's; these do a lot of the same things as easymotion
+call add(g:pathogen_disabled, 'Nexus')
+call add(g:pathogen_disabled, 'vim-fanfingtastic')
+call add(g:pathogen_disabled, 'vim-KWEasy')
+
 
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect()

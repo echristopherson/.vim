@@ -127,3 +127,12 @@
 [submodule "bundle/vim-easymotion"]
 	path = bundle/vim-easymotion
 	url = https://github.com/Lokaltog/vim-easymotion.git
+[submodule "bundle/vim-fanfingtastic"]
+	path = bundle/vim-fanfingtastic
+	url = https://github.com/dahu/vim-fanfingtastic.git
+[submodule "bundle/Nexus"]
+	path = bundle/Nexus
+	url = https://github.com/dahu/Nexus.git
+[submodule "bundle/vim-KWEasy"]
+	path = bundle/vim-KWEasy
+	url = https://github.com/dahu/vim-KWEasy.git
