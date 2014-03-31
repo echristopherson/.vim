@@ -453,7 +453,10 @@ omap <special> <D-n> <Esc><D-n>
 
 " EasyMotion
 let g:EasyMotion_do_mapping = 1
-map , <Plug>(easymotion-prefix)
+" I'd like to use , for easymotion-prefix, but I already have a few things
+" (e.g. ,w) that it conflicts with.
+map <Leader>e <Plug>(easymotion-prefix)
+map ,s <Leader>es
 
 
 
