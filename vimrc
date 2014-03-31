@@ -2,28 +2,32 @@
 set nocompatible
 set nohidden
 
-" Bootstrap Pathogen
+let b:this_dir = expand('<sfile>:p:h')
+
+" Source file if it exists and is readable
+" TODO: Replace with :runtime?
+function! SourceIfReadable(filename)
+  if filereadable(a:filename)
+    exec 'source ' . a:filename
+  else
+    echo a:filename . ' not found.'
+  endif
+endfunction
+
+"
+" Pathogen
+"
 
 " Ignored plugins
-let g:pathogen_disabled = []
-"call add(g:pathogen_disabled, 'YouCompleteMe')
-call add(g:pathogen_disabled, 'cocoa.vim')
-call add(g:pathogen_disabled, 'Align')
-call add(g:pathogen_disabled, 'vim-abolish')
-call add(g:pathogen_disabled, 'applescript.vim')
-call add(g:pathogen_disabled, 'HiCursorWords')
-call add(g:pathogen_disabled, 'vim-colors-solarized')
-call add(g:pathogen_disabled, 'YouCompleteMe')
-call add(g:pathogen_disabled, 'ultisnips')
-" dahu's; these do a lot of the same things as easymotion
-call add(g:pathogen_disabled, 'Nexus')
-call add(g:pathogen_disabled, 'vim-fanfingtastic')
-call add(g:pathogen_disabled, 'vim-KWEasy')
-call add(g:pathogen_disabled, 'tslime.vim')
+call SourceIfReadable(b:this_dir . '/vimrc-ignore')
 
-
+" Actually start Pathogen
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect()
+
+"
+" Main settings
+"
 
 " Settings that are generally a good idea, but are also required by Pathogen
 syntax on
@@ -691,15 +695,5 @@ endif
 
 
 
-" Source file if it exists and is readable
-function! SourceIfReadable(filename)
-  if filereadable(a:filename)
-    exec 'source ' . a:filename
-  else
-    echo a:filename . ' not found.'
-  endif
-endfunction
-
 " Source key bindings
-let b:this_dir = expand('<sfile>:p:h')
 call SourceIfReadable(b:this_dir . '/vimrc-keys')
