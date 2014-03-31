@@ -195,7 +195,7 @@ inoremap <C-\><C-w> <C-w>
 
 " TODO: Get this working again. I think my Cscope bindings may step on the use
 " of <C-\> here.
-imap <expr> <C-w> 
+imap <expr> <C-w>
 \ (virtcol('.') == 1 ?
     \ '<Backspace>' :
     \ (IsDirectlyAfterLeadingWhitespace() ?
