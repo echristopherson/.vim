@@ -411,6 +411,10 @@ noremap ,, ,
 noremap <Leader>, ,
 noremap <Leader>; ,
 
+" Surround
+nmap S ys
+nmap SS yss
+
 " Change/delete selected text without putting it in a register
 noremap ,c "_c
 noremap ,C "_C
@@ -422,6 +426,7 @@ noremap ,R "_R
 " surround to match its visual mapping. Besides, now that I've installed
 " easymotion, I'd like to use ,s for its bidirectional f/F-like action.
 "noremap ,s "_s
+" ,S is really the same as ys/S, since that is nondestructive.
 noremap ,S ys
 noremap ,x "_x
 noremap ,X "_X
@@ -429,10 +434,6 @@ noremap ,X "_X
 " Delete selected text without putting it in a register; then paste over it
 vnoremap ,p "_dP
 vnoremap ,P "_dP
-
-" Surround
-nmap S ys
-nmap SS yss
 
 " Send last-yanked text to Clipper, assuming it's running (port 8377)
 " NOTE that this doesn't yet handle Unicode correctly.
