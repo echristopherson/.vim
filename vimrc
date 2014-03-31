@@ -14,6 +14,7 @@ call add(g:pathogen_disabled, 'applescript.vim')
 call add(g:pathogen_disabled, 'HiCursorWords')
 call add(g:pathogen_disabled, 'vim-colors-solarized')
 call add(g:pathogen_disabled, 'YouCompleteMe')
+call add(g:pathogen_disabled, 'ultisnips')
 
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect()
