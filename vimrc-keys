@@ -464,6 +464,11 @@ map <Leader>e <Plug>(easymotion-prefix)
 " easymotion.
 " TODO: I see now that CamelCaseMotion doesn't have an equivalent for ge. We
 " might want to implement that and send it to Ingo.
+" TODO: It appears that mapping easymotion functions in this way causes them
+" not to be mapped under easymotion-prefix; thus in the current config the
+" only easymotion functions to work with <Leader>e are -w, -b, and -e. If we
+" map keys to existing key sequences rather than <Plug>..., this doesn't
+" happen.  Find a good way to fix this.
 "map ,w  <Plug>(easymotion-w)
 "map ,b  <Plug>(easymotion-b)
 "map ,e  <Plug>(easymotion-e)
