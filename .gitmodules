@@ -136,3 +136,6 @@
 [submodule "bundle/vim-KWEasy"]
 	path = bundle/vim-KWEasy
 	url = https://github.com/dahu/vim-KWEasy.git
+[submodule "bundle/timl"]
+	path = bundle/timl
+	url = https://github.com/tpope/timl.git
