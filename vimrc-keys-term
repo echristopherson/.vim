@@ -102,7 +102,7 @@ if $TERM == 'rxvt'
     imap <S-C-Right> <C-o><S-C-Right>
     map  <S-C-Left>  <Plug>CamelCaseMotion_b
     imap <S-C-Left>  <C-o><S-C-Left>
-    
+
     " TODO: Make CamelCase-aware forward/backward delete/backspace
 endif
 
@@ -137,7 +137,7 @@ map! <F17>~ <PageUp>
 " TODO
 if $TERM == 'rxvt'
     " TODO
-    
+
     " rxvt keys (vim uses application mode):
     "                                    -------Windows-----  -----MacPorts------
     "  Up:                               ANSI    Application  ANSI    Application
@@ -171,7 +171,7 @@ if $TERM == 'rxvt'
     map! <F19>C <Right>
     map  <F19>D <Left>
     map! <F19>D <Left>
-    
+
     " Ctrl+arrows in rxvt
     map  <F19>a <C-Up>
     map! <F19>a <C-Up>
