@@ -605,7 +605,7 @@ let g:ctrlp_custom_ignore = {
 
 " Use backspace to delete backwards, even when it sends 8 instead of 127.
 let g:ctrlp_prompt_mappings = {
-    \ 'PrtBS()': ['<C-h>', '<C-?>'],
+    \ 'PrtBS()': ['<C-h>', '<C-?>', '<BS>'],
     \ 'PrtCurLeft()': ['<Left>'],
     \ }
 " When creating new file with <C-y>, don't open a new tab or window
