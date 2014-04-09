@@ -255,10 +255,13 @@ highlight TabLineFill term=underline cterm=underline gui=underline ctermfg=white
 
 " Diff - added -EAC
 " These are taken from solarized in its "degrade" mode.
-highlight DiffAdd    term=reverse ctermbg=NONE ctermfg=green  gui=reverse guibg=NONE guifg=#5f8700
-highlight DiffChange term=reverse ctermbg=NONE ctermfg=yellow gui=reverse guibg=NONE guifg=#af8700
-highlight DiffDelete term=reverse ctermbg=NONE ctermfg=red    gui=reverse guibg=NONE guifg=#af0000
-highlight DiffText   term=reverse ctermbg=NONE ctermfg=blue   gui=reverse guibg=NONE guifg=#0087ff
+" -- except I tweaked them by providing text colors, when something changed
+"  that made everything look awful. I also switched fg and bg and made them
+"  NONE instead of reverse.
+highlight DiffAdd    term=NONE cterm=NONE ctermbg=green ctermfg=black gui=NONE guibg=#5f8700 guifg=black
+highlight DiffChange term=NONE cterm=NONE ctermbg=yellow ctermfg=black gui=NONE guibg=#af8700 guifg=black
+highlight DiffDelete term=NONE cterm=NONE ctermbg=red ctermfg=black gui=NONE guibg=#af0000 guifg=NONE
+highlight DiffText   term=NONE cterm=NONE ctermbg=blue ctermfg=black gui=NONE guibg=#0087ff guifg=black
 
 " Sign column - added -EAC
 " Default
