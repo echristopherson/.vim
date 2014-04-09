@@ -258,9 +258,12 @@ highlight TabLineFill term=underline cterm=underline gui=underline ctermfg=white
 " -- except I tweaked them by providing text colors, when something changed
 "  that made everything look awful. I also switched fg and bg and made them
 "  NONE instead of reverse.
+" Then I made deleted lines have the same fg and bg, because I don't like the
+" look of the '---' filler lines. I can actually still faintly see those
+" characters, but they're not as bothersome now.
 highlight DiffAdd    term=NONE cterm=NONE ctermbg=green ctermfg=black gui=NONE guibg=#5f8700 guifg=black
 highlight DiffChange term=NONE cterm=NONE ctermbg=yellow ctermfg=black gui=NONE guibg=#af8700 guifg=black
-highlight DiffDelete term=NONE cterm=NONE ctermbg=red ctermfg=black gui=NONE guibg=#af0000 guifg=NONE
+highlight DiffDelete term=NONE cterm=NONE ctermbg=red ctermfg=red gui=NONE guibg=#af0000 guifg=#af0000
 highlight DiffText   term=NONE cterm=NONE ctermbg=blue ctermfg=black gui=NONE guibg=#0087ff guifg=black
 
 " Sign column - added -EAC
