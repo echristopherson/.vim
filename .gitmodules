@@ -139,3 +139,6 @@
 [submodule "bundle/timl"]
 	path = bundle/timl
 	url = https://github.com/tpope/timl.git
+[submodule "bundle/vim-fugitive_echristopherson"]
+	path = bundle/vim-fugitive_echristopherson
+	url = git@github.com:echristopherson/vim-fugitive.git

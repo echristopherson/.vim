@@ -17,3 +17,6 @@ call add(g:pathogen_disabled, 'vim-fanfingtastic')
 call add(g:pathogen_disabled, 'vim-KWEasy')
 call add(g:pathogen_disabled, 'tslime.vim')
 call add(g:pathogen_disabled, 'timl')
+
+" Use my fork of Fugitive
+call add(g:pathogen_disabled, 'vim-fugitive')
