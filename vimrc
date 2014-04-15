@@ -665,7 +665,9 @@ function! AirlineThemePatch(palette)
   endif
 endfunction
 
-
+" Tweak to allow the use of OpenSSH sftp and scp in netrw
+" Use slashes, even on Windows.
+set shellslash
 
 
 
