@@ -113,10 +113,10 @@ if has("autocmd")
     " (happens when dropping a file on gvim).
     " EXCEPT if file is a gitcommit file; then start at beginning.
     autocmd BufReadPost *
-          \ if &filetype != 'gitcommit'
+          \ if &filetype != 'gitcommit' |
           \     if line("'\"") > 0 && line("'\"") <= line("$") |
           \       exe "normal! g`\"" |
-          \     endif
+          \     endif |
           \ endif
   augroup END
 
