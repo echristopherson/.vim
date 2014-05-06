@@ -13,10 +13,12 @@ let macvim_skip_cmd_opt_movement = 1
 " TODO: Set Opt+Up/Down to beginning/end of paragraph (or just use
 " macvim_skip_cmd_opt_movement).
 " TODO: Make Opt+Right go to end of line when on last word.
-noremap  <D-Left> <Home>
-noremap! <D-Left> <Home>
-noremap  <D-Right> <End>
-noremap! <D-Right> <End>
+if has('gui_running') && has('gui_macvim')
+    noremap  <D-Left> <Home>
+    noremap! <D-Left> <Home>
+    noremap  <D-Right> <End>
+    noremap! <D-Right> <End>
+endif
 
 " Turn various timeout types on or off
 set timeout " time out on :mappings and key codes
@@ -446,11 +448,13 @@ nmap <C-w><C-o> <C-w>o
 
 " Open new split with blank buffer
 " TODO: Did I mean to make these non-n maps use Cmd+*lower-case* n?
-nnoremap <special> <D-N> :new<CR>
-vmap <special> <D-n> <Esc><D-n>gv
-imap <special> <D-n> <C-O><D-n>
-cmap <special> <D-n> <C-C><D-n>
-omap <special> <D-n> <Esc><D-n>
+if has('gui_running') && has('gui_macvim')
+    nnoremap <special> <D-N> :new<CR>
+    vmap <special> <D-n> <Esc><D-n>gv
+    imap <special> <D-n> <C-O><D-n>
+    cmap <special> <D-n> <C-C><D-n>
+    omap <special> <D-n> <Esc><D-n>
+endif
 
 " EasyMotion
 let g:EasyMotion_do_mapping = 1
