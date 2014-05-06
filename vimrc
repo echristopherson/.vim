@@ -111,9 +111,12 @@ if has("autocmd")
     " When editing a file, always jump to the last known cursor position.
     " Don't do it when the position is invalid or when inside an event handler
     " (happens when dropping a file on gvim).
+    " EXCEPT if file is a gitcommit file; then start at beginning.
     autocmd BufReadPost *
-          \ if line("'\"") > 0 && line("'\"") <= line("$") |
-          \   exe "normal! g`\"" |
+          \ if &filetype != 'gitcommit'
+          \     if line("'\"") > 0 && line("'\"") <= line("$") |
+          \       exe "normal! g`\"" |
+          \     endif
           \ endif
   augroup END
 
