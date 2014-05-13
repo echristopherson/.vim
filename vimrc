@@ -672,6 +672,14 @@ endfunction
 " Use slashes, even on Windows.
 set shellslash
 
+" In Windows, add $TEMP (which is normally %USERPROFILE%\AppData\Local\Temp)
+" to 'directory' (the setting that tells Vim where to put temp files; normally
+" .,c:\tmp,c:\temp.
+" TODO: We might want to take out `.`.
+if IsHostOSWindows()
+    set directory+=$TEMP
+endif
+
 
 
 " TODO
