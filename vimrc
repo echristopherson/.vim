@@ -153,7 +153,7 @@ if has("autocmd")
   " Otherwise XML style is used, which means all non-self-closing tags are
   " matched.
   "let g:closetag_html_style=1
-  autocmd FileType html,xml,xsl source ~/.vim/scripts/closetag.vim
+  autocmd FileType html,xml,xsl runtime scripts/closetag.vim
   " Also, set noignorecase for html files or edit b:unaryTagsStack to match
   " your capitalization style.  You may set this variable before or after
   " loading the script, or simply change the file itself.
@@ -390,7 +390,7 @@ endif
 let loaded_vimwiki = 1
 
 let wiki = {}
-let wiki.path = "$HOME/.vim/vimwiki"
+let wiki.path = b:this_dir . '/vimwiki'
 let wiki.path_html = '$HOME/Sites/vimwiki'
 let wiki.auto_export = 1
 let g:vimwiki_list = [wiki]
