@@ -268,6 +268,14 @@ highlight DiffChange term=NONE cterm=NONE ctermbg=yellow ctermfg=black gui=NONE 
 highlight DiffDelete term=NONE cterm=NONE ctermbg=red ctermfg=red gui=NONE guibg=#af0000 guifg=#af0000
 highlight DiffText   term=NONE cterm=NONE ctermbg=blue ctermfg=black gui=NONE guibg=#0087ff guifg=black
 
+" Colors for diff syntax mode
+" For whatever reason, I like colored background when viewing side-by-side
+" diffs but colored text on a normal background when viewing an actual diff
+" file.
+highlight diffAdded   term=NONE cterm=NONE ctermbg=green ctermfg=black gui=NONE guifg=#5f8700 guibg=NONE
+highlight diffChanged term=NONE cterm=NONE ctermbg=yellow ctermfg=black gui=NONE guifg=#af8700 guibg=NONE
+highlight diffRemoved term=NONE cterm=NONE ctermbg=red ctermfg=red gui=NONE guifg=#af0000 guibg=NONE
+
 " Sign column - added -EAC
 " Default
 "highlight SignColumn term=standout ctermfg=51 ctermbg=250 guifg=DarkBlue guibg=Grey
