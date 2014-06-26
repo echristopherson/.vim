@@ -50,19 +50,19 @@ set nocompatible
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
-if has("vms")
-  set nobackup          " do not keep a backup file, use versions instead
+" Persistent undo
+if has('persistent_undo')
+  set undofile
+  set undodir=~/.vimundo
+  " No backup files
+  set nobackup
 else
-  " Persistent undo
-  if has('persistent_undo')
-    set undofile
-    set undodir=~/.vimundo
-    " No backup files
-    set nobackup
-  else
-    set backup            " keep a backup file
-  endif
+  set backup            " keep a backup file
 endif
+
+" Allow u to undo reloading of a file, including when the file is changed by
+" an external process.
+set undoreload=-1
 
 set history=50          " keep 50 lines of command line history
 set ruler               " show the cursor position all the time
