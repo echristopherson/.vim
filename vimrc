@@ -623,6 +623,12 @@ if v:version >= 700
   au BufEnter * if(exists('b:winview')) | call winrestview(b:winview) | endif
 endif
 
+" Change <C-p> keybind so it opens MRU window. That way I don't have to wait
+" for list of files in this hierarchy to be updated if all I want to do is
+" visit an open buffer or an MRU file.
+" I can then use <C-b> for open buffers and <C-f> for files in this hierarchy.
+let g:ctrlp_cmd = 'CtrlPMRU'
+
 " Add more HTML tags to built-in indentation rules; see
 " <http://www.vim.org/scripts/script.php?script_id=2075>.
 let g:html_indent_inctags = "html,body,head,tbody,p"
