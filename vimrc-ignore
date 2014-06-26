@@ -18,5 +18,5 @@ call add(g:pathogen_disabled, 'vim-KWEasy')
 call add(g:pathogen_disabled, 'tslime.vim')
 call add(g:pathogen_disabled, 'timl')
 
-" Use my fork of Fugitive
-call add(g:pathogen_disabled, 'vim-fugitive')
+" Don't use my fork of Fugitive
+call add(g:pathogen_disabled, 'vim-fugitive_echristopherson')
