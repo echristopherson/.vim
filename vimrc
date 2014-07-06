@@ -706,6 +706,8 @@ if 0
   " TODO: Why is it that:
   " 1. this only works in 16-color mode when $TERM is not a 256-color term?
   " 2. this doesn't take effect in mvim?
+  " 3. bundle/vim-colors-solarized/autoload/togglebg.vim doesn't load
+  "    automatically?
 endif
 
 
