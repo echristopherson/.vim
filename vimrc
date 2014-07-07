@@ -686,6 +686,17 @@ if IsHostOSWindows()
     set directory+=$TEMP
 endif
 
+"
+" Fugitive
+"
+
+" Always split vertically (this affects Vim in general, but it's most
+" noticeable for me in fugitive).
+set diffopt+=vertical
+
+" TODO: Find option to not fold changesets in fugitive. I may actually like
+" that feature, though.
+
 
 
 " TODO
