@@ -492,6 +492,11 @@ map ,n  <Plug>(easymotion-n)
 map ,N  <Plug>(easymotion-N)
 map ,s  <Plug>(easymotion-s)
 
+" Put line <count> lines above cursor (default 1) at top of window.
+nnoremap <silent> <Leader>zt :<C-u>exec 'normal! ' . v:count . 'kzt' . v:count . 'j'<CR>
+
+
+
 " Source terminal-specific key bindings
 " TODO: Actually, "terminal-specific" isn't valid anymore, since I'm going to
 " use these same keybindings in Linux and Windows terminal vim and gvim. As it
