@@ -556,47 +556,10 @@ let Tlist_Enable_Fold_Column = 0
 " f: Find this file
 " i: Find files #including this file
 
-" Search for regex in open buffers. Open quicklist window with results.
-" NOTE: For consistency with my modification to ack.vim, don't jump to first
-" hit (that's the j parameter after the regex in vimgrep).
-" Mostly my own code, but enhanced with some insight from ack.vim.
-" TODO: Now I use ag.vim, which does jump to first result.
-" TODO: I actually had a plugin called buffergrep.vim, which I had forgotten
-" about. Some day see if that's worth using instead of this.
-" TODO: Make a version that uses ag.
-function! BufGrep(search_regex)
-  let buffer_list = []
-  " TODO: Ignore unlisted buffers?
-  for i in range(bufnr('$'))
-    if bufexists(i)
-      " Escape whitespace in name.
-      " TODO: Find out if anything else needs escaping.
-      let escaped_name = substitute(bufname(i), '\s', '\\&', 'g')
-      call add(buffer_list, escaped_name)
-    endif
-  endfor
-
-  echomsg 'BufGrep executing silent! vimgrep /' . a:search_regex . '/j ' . join(buffer_list, ' ')
-  execute 'silent! vimgrep /' . a:search_regex . '/j ' . join(buffer_list, ' ')
-  botright copen
-  redraw!
-endfunction
-
-" For some reason, specifying multiple args/one args with spaces works the
-" same whether we use -nargs=1 or -nargs=+. In both cases, it treats the rest
-" of the line as an argument with spaces in it.
-command! -nargs=1 BufGrep execute 'call BufGrep(<q-args>)'
-
-" TODO: Move this to plugin file
-" TODO: Make complementary functions/commands for lvimgrep, grepadd,
-" lvimgrepadd; plus ack.
-
 "
 " UltiSnips settings
 "
 let g:UltiSnipsNoPythonWarning = 1 " don't warn if wrong Python or no Python is found
-
-
 
 "
 " CtrlP settings
