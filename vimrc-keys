@@ -497,7 +497,7 @@ nnoremap <silent> <Leader>zt :<C-u>exec 'normal! ' . v:count . 'kzt' . v:count .
 
 " Show syntax groups under cursor
 " TODO: Find a key binding for this, or make a function or something.
-" map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+map <F9> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 
 
