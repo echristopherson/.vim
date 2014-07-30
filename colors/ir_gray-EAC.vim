@@ -79,7 +79,9 @@ let colors_name = "ir_gray-EAC"
 " guibg changed from ir_black's black. This makes it easier to spot the edges
 " of overlapping MacVim windows. I think I like #181818 a little more, but
 " it's not as easy to see the border. -EAC
-hi Normal           guifg=#f6f3e8     guibg=#1C1C1C     gui=NONE      ctermfg=NONE        ctermbg=NONE        cterm=NONE
+" guifg changed from the yellowish #f6f3e8 to the gray #BABABA, which I took
+" from iTerm2's default white/foreground color.
+hi Normal           guifg=#BABABA     guibg=#1C1C1C     gui=NONE      ctermfg=NONE        ctermbg=NONE        cterm=NONE
 " Used for some 'list' characters (not including tabs and trailing spaces)
 hi NonText          guifg=#070707     guibg=#1C1C1C     gui=NONE      ctermfg=black       ctermbg=NONE        cterm=NONE
 
