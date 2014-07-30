@@ -89,9 +89,6 @@ if &t_Co > 2 || has("gui_running")
   endif
 endif
 
-" Show syntax groups under cursor
-" TODO: Find a key binding for this, or make a function or something.
-" map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
   " Enable file type detection.
