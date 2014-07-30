@@ -224,7 +224,7 @@ cnoremap <A-Delete> <Delete>
 " Run xmp -- evaluate selected Ruby code and put #=> value at the ends of
 " lines.
 " TODO: Use built-in Ruby mode?
-"noremap <silent> <F2> :!ruby -r ~/Scripts/xmp/xmp -n -e 'xmp($_, "\%l\t\t\# -> \%r\n")'<CR>
+"noremap <silent> <F3> :!ruby -r ~/Scripts/xmp/xmp -n -e 'xmp($_, "\%l\t\t\# -> \%r\n")'<CR>
 
 " Allow selection of pasted text with <Leader>gv, the way old selection is
 " reselected with gv.
