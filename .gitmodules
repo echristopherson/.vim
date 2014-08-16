@@ -145,3 +145,6 @@
 [submodule "bundle/Improved-AnsiEsc"]
 	path = bundle/Improved-AnsiEsc
 	url = https://github.com/vim-scripts/Improved-AnsiEsc.git
+[submodule "bundle/NrrwRgn"]
+	path = bundle/NrrwRgn
+	url = https://github.com/chrisbra/NrrwRgn.git
