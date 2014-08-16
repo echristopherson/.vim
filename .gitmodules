@@ -142,3 +142,6 @@
 [submodule "bundle/vim-fugitive_echristopherson"]
 	path = bundle/vim-fugitive_echristopherson
 	url = git@github.com:echristopherson/vim-fugitive.git
+[submodule "bundle/Improved-AnsiEsc"]
+	path = bundle/Improved-AnsiEsc
+	url = https://github.com/vim-scripts/Improved-AnsiEsc.git
