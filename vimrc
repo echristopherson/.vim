@@ -492,15 +492,20 @@ fun! Runcmd(cmd)
 endfun
 com! -nargs=1 Runcmd :call Runcmd("<args>")
 
-" breakindent (supplied by patch to vim at <https://retracile.net/wiki/VimBreakIndent>)
+" When long lines wrap, continuation lines should be indented at least as much
+" as the first screen line; additionally also insert eight break characters
+" for extra clarity.
 if exists('+breakindent')
   set breakindent
-  " TODO: Choose between these. Currently it looks like breakindentshift is
-  " stuck showing spaces. Maybe figure out a way to do something like
-  " listchars, and submit a patch implementing that?
-  "set breakindentshift=8
-  set breakindentshift=0
   set showbreak=........
+  if exists('+breakindentshift')
+    " Just show break characters.
+    " This is the option to use with the old, non-official, breakindent patch.
+    set breakindentshift=0
+  elseif exists('+breakindentopt')
+    " Just show break characters
+    set breakindentopt=sbr
+  endif
 endif
 
 set autoindent " always set autoindenting on. Among other things, this makes gq continue the current indent level.
