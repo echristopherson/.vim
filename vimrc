@@ -582,6 +582,11 @@ let g:ctrlp_open_new_file = 'r'
 " Not only for CtrlP, although it helps there:
 set wildignore+=.*.swp,.#*#,#*#
 
+" Exclude files from MRU list
+let g:ctrlp_mruf_exclude = '\v(^|[\/])\.git\/(index|COMMIT_EDITMSG)$'
+
+
+
 " Restore cursor position in window upon returning to buffer
 if v:version >= 700
   au BufLeave * let b:winview = winsaveview()
