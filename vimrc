@@ -583,7 +583,7 @@ let g:ctrlp_open_new_file = 'r'
 set wildignore+=.*.swp,.#*#,#*#
 
 " Exclude files from MRU list
-let g:ctrlp_mruf_exclude = '\v(^|[\/])\.git\/(index|COMMIT_EDITMSG)$'
+let g:ctrlp_mruf_exclude = '\v(^|[\\\/])\.git[\\\/](index|COMMIT_EDITMSG)$'
 
 
 
