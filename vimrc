@@ -53,7 +53,7 @@ set backspace=indent,eol,start
 " Persistent undo
 if has('persistent_undo')
   set undofile
-  set undodir=~/.vimundo
+  set undodir=~/.vim/undo
   " No backup files
   set nobackup
 else
