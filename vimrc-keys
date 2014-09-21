@@ -497,6 +497,11 @@ nnoremap <silent> <Leader>zt :<C-u>exec 'normal! ' . v:count . 'kzt' . v:count .
 " TODO: Find a key binding for this, or make a function or something.
 map <F9> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
+" Use Cmd+Enter for fullscreen (in addition to MacVim's default Ctrl+Cmd+F)
+noremap <D-Enter> :set invfullscreen<CR>
+" And Alt+Enter, for other platforms
+noremap <M-Enter> :set invfullscreen<CR>
+
 
 
 " Source terminal-specific key bindings
