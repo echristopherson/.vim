@@ -500,7 +500,7 @@ map <F9> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<
 " Use Cmd+Enter for fullscreen (in addition to MacVim's default Ctrl+Cmd+F)
 if has('gui_running') && has('gui_macvim')
     noremap <D-Enter> :set invfullscreen<CR>
-end if
+endif
 " And Alt+Enter, for Mac and other platforms
 noremap <M-Enter> :set invfullscreen<CR>
 
