@@ -504,6 +504,42 @@ endif
 " And Alt+Enter, for Mac and other platforms
 noremap <M-Enter> :set invfullscreen<CR>
 
+" From Ben Fritz on vim-use; use <C-Space> in normal, visual, and
+" operator pending modes to cycle between no numbering, relative numbering,
+" relative numbering except current line absolute, and absolute numbering.
+if exists('+relativenumber')
+  nnoremap <expr> <C-@> CycleLNum()
+  nnoremap <expr> <C-Space> CycleLNum()
+  xnoremap <expr> <C-@> CycleLNum()
+  xnoremap <expr> <C-Space> CycleLNum()
+  onoremap <expr> <C-@> CycleLNum()
+  onoremap <expr> <C-Space> CycleLNum()
+
+  " function to cycle between relative, normal, and no line numbering
+  " Modified by EAC; I don't want relative/absolute or absolute numbering.
+  func! CycleLNum()
+    "if &l:rnu && !&l:nu
+    "  setlocal nu
+    "elseif &l:rnu && &l:nu
+    "  setlocal nornu
+    "elseif &l:nu && !&l:rnu
+    "  setlocal nonu
+    "else
+    "  setlocal rnu
+    "endif
+    if &l:rnu
+      setlocal nornu nonu
+    else
+      setlocal rnu nonu
+    endif
+    " sometimes (like in op-pending mode) the redraw doesn't happen
+    " automatically
+    redraw
+    " do nothing, even in op-pending mode
+    return ""
+  endfunc
+endif
+
 
 
 " Source terminal-specific key bindings
