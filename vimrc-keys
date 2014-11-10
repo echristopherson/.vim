@@ -507,6 +507,15 @@ noremap <M-Enter> :set invfullscreen<CR>
 " From Ben Fritz on vim-use; use <C-Space> in normal, visual, and
 " operator pending modes to cycle between no numbering, relative numbering,
 " relative numbering except current line absolute, and absolute numbering.
+" TODO: Bugs:
+" - in operator-pending mode, the terminal cursor moves to the end of the text
+"   on the screen, even though Vim's insertion point doesn't move. Ben thinks
+"   this is a bug in Vim itself; he thinks he reported it, but can't find it
+"   now.
+" - numbering stays on after it's needed. Ben suggested using a
+"   CursorHold/CursorMoved autocmd to restore the status quo.
+" - <C-Space> only works in GVim; and <C-@> only works in terminal Vim, unless
+"   you actually use the 2 key.
 if exists('+relativenumber')
   nnoremap <expr> <C-@> CycleLNum()
   nnoremap <expr> <C-Space> CycleLNum()
