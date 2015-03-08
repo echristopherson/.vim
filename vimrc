@@ -53,7 +53,7 @@ set backspace=indent,eol,start
 " Persistent undo
 if has('persistent_undo')
   set undofile
-  set undodir=~/.vim/undo
+  let &undodir = b:this_dir . "/undo"
   " No backup files
   set nobackup
 else
@@ -503,8 +503,11 @@ if exists('+breakindent')
     " This is the option to use with the old, non-official, breakindent patch.
     set breakindentshift=0
   elseif exists('+breakindentopt')
-    " Just show break characters
-    set breakindentopt=sbr
+    " Indent by amount given by line's indentation, then add 'showbreak'
+    " characters.
+    " TODO: This unfortunately shows blank spaces on the left when the line is
+    " indented. I'd prefer it to show '.' throughout.
+    set breakindentopt=shift:0
   endif
 endif
 
