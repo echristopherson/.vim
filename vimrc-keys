@@ -493,6 +493,9 @@ map ,s  <Plug>(easymotion-s)
 " Put line <count> lines above cursor (default 1) at top of window.
 nnoremap <silent> <Leader>zt :<C-u>exec 'normal! ' . v:count . 'kzt' . v:count . 'j'<CR>
 
+" Put line <count> lines above cursor (default 1) at top of window.
+nnoremap <silent> <Leader>zb :<C-u>exec 'normal! ' . v:count . 'jzb' . v:count . 'k'<CR>
+
 " Show syntax groups under cursor
 " TODO: Find a key binding for this, or make a function or something.
 map <F9> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
