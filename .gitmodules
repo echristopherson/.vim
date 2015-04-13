@@ -157,3 +157,6 @@
 [submodule "bundle/vim-dispatch"]
 	path = bundle/vim-dispatch
 	url = https://github.com/tpope/vim-dispatch.git
+[submodule "bundle/vim-you-keep-using-that-word"]
+	path = bundle/vim-you-keep-using-that-word
+	url = https://github.com/ap/vim-you-keep-using-that-word.git
