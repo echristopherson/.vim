@@ -232,10 +232,13 @@ nnoremap <expr> <Leader>gv '`[' . strpart(getregtype(), 0, 1) . '`]'
 " Map \ for global/selection search and replace; after replacement is done,
 " move cursor back to original location with ``.
 " TODO: undoing afterward puts the cursor back to the location of the last
-" change. Find some way to fix this.
+" change. Find some way to fix this. First, figure out semantically correct
+" determination of where the cursor *should* go (both when executing this and
+" when undoing it). See
+" <http://vim.wikia.com/wiki/Restore_the_cursor_position_after_undoing_text_change_made_by_a_script>.
 nnoremap \\ :%s//g<Bar>norm!``<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
 " In visual mode, '<,'> should be inserted automatically.
-vnoremap \\ :s//g<Bar>norm!``<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
+vnoremap \\ :s//g<Bar>norm!``<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>\%V
 
 " Map Opt+Return to send Return without continuing comments on the next line.
 " Also map Shift+Return the same; for some reason gvim in Windows doesn't run
