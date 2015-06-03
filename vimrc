@@ -649,6 +649,9 @@ endfunction
 
 " Tweak to allow the use of OpenSSH sftp and scp in netrw
 " Use slashes, even on Windows.
+" TODO: This messes up CtrlSF, because its call to shellescape causes single
+" quotes to be used instead of double. It's likely other plugins would be
+" affected.
 set shellslash
 
 " In Windows, add $TEMP (which is normally %USERPROFILE%\AppData\Local\Temp)
