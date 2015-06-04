@@ -39,6 +39,7 @@ let mapleader='\'
 
 " Help in a new tab instead of a window
 noremap  <silent> <F1> :tab help<CR>
+inoremap <silent> <F1> <C-o>:tab help<CR>
 
 " Toggle enable/disable custom keymap in insert mode and search command line
 " TODO: See if this does anything different from CTRL-^ in insert mode.
@@ -67,6 +68,7 @@ inoremap <silent> <F10> <C-o>:call ToggleKeymap()<CR>
 
 " Turn off highlighting of search results
 noremap  <silent> <F12> :nohl<CR>
+inoremap <silent> <F12> <C-o>:nohl<CR>
 
 " Allow shift+arrow to start visual mode. Also see $VIM/gvimrc.
 " let macvim_hig_shift_movement = 1
@@ -502,6 +504,7 @@ nnoremap <silent> <Leader>zb :<C-u>exec 'normal! ' . v:count . 'jzb' . v:count .
 " Show syntax groups under cursor
 " TODO: Find a key binding for this, or make a function or something.
 map <F9> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+inoremap <F9> <C-o>:echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 " Use Cmd+Enter for fullscreen (in addition to MacVim's default Ctrl+Cmd+F)
 if has('gui_running') && has('gui_macvim')
