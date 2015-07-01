@@ -673,7 +673,18 @@ set diffopt+=vertical
 " TODO: Find option to not fold changesets in fugitive. I may actually like
 " that feature, though.
 
+"
+" Signature
+"
 
+" Change a few default mappings; I actually use `[ `] '[ '].
+
+let g:SignatureMap = {
+  \ 'GotoNextLineAlpha'  :  "<Leader>']",
+  \ 'GotoPrevLineAlpha'  :  "<Leader>'[",
+  \ 'GotoNextSpotAlpha'  :  "<Leader>`]",
+  \ 'GotoPrevSpotAlpha'  :  "<Leader>`[",
+  \ }
 
 " TODO
 " Solarized
