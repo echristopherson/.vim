@@ -559,10 +559,10 @@ if exists('+relativenumber')
 endif
 
 " Use <Leader>c to change directory to current buffer's
-noremap <Leader>c :cd %:p:h
+noremap <Leader>c :cd %:p:h<CR>
 
 " Use <Leader>l to list buffers
-noremap <Leader>l :ls
+noremap <Leader>l :ls<CR>
 
 
 
