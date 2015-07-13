@@ -558,6 +558,12 @@ if exists('+relativenumber')
   endfunc
 endif
 
+" Use <Leader>c to change directory to current buffer's
+noremap <Leader>c :cd %:p:h
+
+" Use <Leader>l to list buffers
+noremap <Leader>l :ls
+
 
 
 " Source terminal-specific key bindings
