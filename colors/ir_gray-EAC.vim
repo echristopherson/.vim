@@ -83,7 +83,10 @@ let colors_name = "ir_gray-EAC"
 " from iTerm2's default white/foreground color.
 hi Normal           guifg=#BABABA     guibg=#1C1C1C     gui=NONE      ctermfg=NONE        ctermbg=NONE        cterm=NONE
 " Used for some 'list' characters (not including tabs and trailing spaces)
-hi NonText          guifg=#070707     guibg=#1C1C1C     gui=NONE      ctermfg=black       ctermbg=NONE        cterm=NONE
+" Changed to match SpecialKey; I want things like eof:$ to actually show if I
+" specify them in 'listchars'. TODO: Change to something a little more
+" different from other grays, especially Comment, which is #7C7C7C. -EAC
+hi NonText          guifg=#808080     guibg=#1C1C1C     gui=NONE      ctermfg=NONE        ctermbg=NONE        cterm=NONE
 
 hi Cursor           guifg=black       guibg=white       gui=NONE      ctermfg=black       ctermbg=white       cterm=reverse
 hi LineNr           guifg=#3D3D3D     guibg=black       gui=NONE      ctermfg=darkgray    ctermbg=NONE        cterm=NONE
