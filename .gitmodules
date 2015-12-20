@@ -178,3 +178,6 @@
 [submodule "bundle/ansiesc_berdandy"]
 	path = bundle/ansiesc_berdandy~
 	url = https://github.com/berdandy/AnsiEsc.vim.git
+[submodule "bundle/vim-spacebars"]
+	path = bundle/vim-spacebars
+	url = https://github.com/Slava/vim-spacebars.git
