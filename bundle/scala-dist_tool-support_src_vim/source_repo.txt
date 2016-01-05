@@ -1,1 +1,0 @@
-This is taken from <https://github.com/scala/scala-dist.git>. I don't know of any way to make a repo of a subfolder of an existing repo, so I'm just keeping non-source-controlled stuff here. Besides, these files haven't changed in over a year (in some cases, in 3 years).
