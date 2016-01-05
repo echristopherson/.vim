@@ -79,9 +79,14 @@ let colors_name = "ir_gray-EAC"
 " guibg changed from ir_black's black. This makes it easier to spot the edges
 " of overlapping MacVim windows. I think I like #181818 a little more, but
 " it's not as easy to see the border. -EAC
-hi Normal           guifg=#f6f3e8     guibg=#1C1C1C     gui=NONE      ctermfg=NONE        ctermbg=NONE        cterm=NONE
+" guifg changed from the yellowish #f6f3e8 to the gray #BABABA, which I took
+" from iTerm2's default white/foreground color.
+hi Normal           guifg=#BABABA     guibg=#1C1C1C     gui=NONE      ctermfg=NONE        ctermbg=NONE        cterm=NONE
 " Used for some 'list' characters (not including tabs and trailing spaces)
-hi NonText          guifg=#070707     guibg=#1C1C1C     gui=NONE      ctermfg=black       ctermbg=NONE        cterm=NONE
+" Changed to match SpecialKey; I want things like eof:$ to actually show if I
+" specify them in 'listchars'. TODO: Change to something a little more
+" different from other grays, especially Comment, which is #7C7C7C. -EAC
+hi NonText          guifg=#808080     guibg=#1C1C1C     gui=NONE      ctermfg=NONE        ctermbg=NONE        cterm=NONE
 
 hi Cursor           guifg=black       guibg=white       gui=NONE      ctermfg=black       ctermbg=white       cterm=reverse
 hi LineNr           guifg=#3D3D3D     guibg=black       gui=NONE      ctermfg=darkgray    ctermbg=NONE        cterm=NONE
@@ -254,11 +259,27 @@ highlight TabLineSel term=reverse cterm=reverse gui=reverse ctermfg=white guifg=
 highlight TabLineFill term=underline cterm=underline gui=underline ctermfg=white guifg=gray ctermbg=black guibg=black " area without tabs
 
 " Diff - added -EAC
-" These are taken from solarized in its "degrade" mode.
-highlight DiffAdd    term=reverse ctermbg=NONE ctermfg=green  gui=reverse guibg=NONE guifg=#5f8700
-highlight DiffChange term=reverse ctermbg=NONE ctermfg=yellow gui=reverse guibg=NONE guifg=#af8700
-highlight DiffDelete term=reverse ctermbg=NONE ctermfg=red    gui=reverse guibg=NONE guifg=#af0000
-highlight DiffText   term=reverse ctermbg=NONE ctermfg=blue   gui=reverse guibg=NONE guifg=#0087ff
+" These are taken from Solarized in its "degrade" mode.
+" -- except I tweaked them by providing text colors, when something changed
+"  that made everything look awful. I also switched fg and bg and made them
+"  NONE instead of reverse.
+" Then I made deleted lines have the same fg and bg, because I don't like the
+" look of the '---' filler lines. I can actually still faintly see those
+" characters, but they're not as bothersome now.
+" Also, now that I try Solarized again, it doesn't look anything like this
+" (although it might be using the same colors).
+highlight DiffAdd    term=NONE cterm=NONE ctermbg=green ctermfg=black gui=NONE guibg=#5f8700 guifg=black
+highlight DiffChange term=NONE cterm=NONE ctermbg=yellow ctermfg=black gui=NONE guibg=#af8700 guifg=black
+highlight DiffDelete term=NONE cterm=NONE ctermbg=red ctermfg=red gui=NONE guibg=#af0000 guifg=#af0000
+highlight DiffText   term=NONE cterm=NONE ctermbg=blue ctermfg=black gui=NONE guibg=#0087ff guifg=black
+
+" Colors for diff syntax mode
+" For whatever reason, I like colored background when viewing side-by-side
+" diffs but colored text on a normal background when viewing an actual diff
+" file.
+highlight diffAdded   term=NONE cterm=NONE ctermbg=green ctermfg=black gui=NONE guifg=#5f8700 guibg=NONE
+highlight diffChanged term=NONE cterm=NONE ctermbg=yellow ctermfg=black gui=NONE guifg=#af8700 guibg=NONE
+highlight diffRemoved term=NONE cterm=NONE ctermbg=red ctermfg=red gui=NONE guifg=#af0000 guibg=NONE
 
 " Sign column - added -EAC
 " Default

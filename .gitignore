@@ -12,3 +12,5 @@ Icon
 *.o
 *.so
 *.dylib
+.netrwhist
+/undo
