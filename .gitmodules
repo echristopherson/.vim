@@ -175,3 +175,6 @@
 [submodule "bundle/vim-spacebars"]
 	path = bundle/vim-spacebars
 	url = https://github.com/Slava/vim-spacebars.git
+[submodule "bundle/vim-easymotion"]
+	path = bundle/vim-easymotion
+	url = git@github.com:easymotion/vim-easymotion.git
