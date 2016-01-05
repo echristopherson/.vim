@@ -26,11 +26,12 @@ if &compatible
 endif
 
 " Required:
-set runtimepath+=~/.vim/bundle/neobundle.vim/
+" TODO: Make this work if &runtimepath happens to be empty.
+let &runtimepath .= ',' . b:this_dir . '/bundle/neobundle.vim/'
 endif
 
 " Required:
-call neobundle#begin(expand('~/.vim/bundle/'))
+call neobundle#begin(expand(b:this_dir . '/bundle/'))
 
 " Let NeoBundle manage NeoBundle
 " Required:
