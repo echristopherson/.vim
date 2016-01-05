@@ -14,3 +14,4 @@ Icon
 *.dylib
 .netrwhist
 /undo
+/bundle
