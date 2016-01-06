@@ -17,77 +17,7 @@ endfunction
 "
 " NeoBundle
 "
- " Note: Skip initialization for vim-tiny or vim-small.
-if 0 | endif
-
-if has('vim_starting')
-if &compatible
-    set nocompatible               " Be iMproved
-endif
-
-" Required:
-" TODO: Make this work if &runtimepath happens to be empty.
-let &runtimepath .= ',' . b:this_dir . '/bundle/neobundle.vim/'
-endif
-
-" Required:
-call neobundle#begin(expand(b:this_dir . '/bundle/'))
-
-" Let NeoBundle manage NeoBundle
-" Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
-
-" My Bundles here:
-" Refer to |:neobundle-examples|.
-" Note: You don't set neobundle setting in .gvimrc!
-NeoBundle 'Slava/vim-spacebars'
-NeoBundle 'bling/vim-airline'
-NeoBundle 'chrisbra/vim-diff-enhanced'
-NeoBundle 'ctrlpvim/ctrlp.vim'
-NeoBundle 'easymotion/vim-easymotion'
-NeoBundle 'godlygeek/csapprox'
-NeoBundle 'gregsexton/gitv'
-NeoBundle 'jtratner/vim-flavored-markdown'
-NeoBundle 'kana/vim-textobj-user'
-NeoBundle 'kshenoy/vim-signature'
-NeoBundle 'mattn/gist-vim'
-NeoBundle 'mattn/webapi-vim'
-NeoBundle 'michaeljsmith/vim-indent-object'
-NeoBundle 'nelstrom/vim-textobj-rubyblock'
-NeoBundle 'pangloss/vim-javascript'
-NeoBundle 'rking/ag.vim'
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'scrooloose/syntastic'
-NeoBundle 'taiansu/nerdtree-ag'
-NeoBundle 'tpope/timl'
-NeoBundle 'tpope/vim-abolish'
-NeoBundle 'tpope/vim-bundler'
-NeoBundle 'tpope/vim-dispatch'
-NeoBundle 'tpope/vim-endwise'
-NeoBundle 'tpope/vim-eunuch'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'tpope/vim-ragtag'
-NeoBundle 'tpope/vim-rails'
-NeoBundle 'tpope/vim-rake'
-NeoBundle 'tpope/vim-repeat'
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'tpope/vim-unimpaired'
-NeoBundle 'vim-scripts/ZoomWin'
-NeoBundle 'vim-scripts/a.vim'
-NeoBundle 'vim-scripts/buffergrep'
-NeoBundle 'vim-scripts/camelcasemotion'
-NeoBundle 'vim-scripts/matchit.zip'
-
-call neobundle#end()
-
-" Required:
-filetype plugin indent on
-
-" If there are uninstalled bundles found on startup,
-" this will conveniently prompt you to install them.
-NeoBundleCheck
-
-
+call SourceIfReadable('vimrc-neobundle')
 
 " See http://vim.wikia.com/wiki/Main_Page for useful help.
 " vim:sw=2
