@@ -47,6 +47,7 @@ NeoBundle 'Shougo/vimproc.vim', {
 \    },
 \ }
 NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/neomru.vim'
 
 NeoBundle 'Slava/vim-spacebars'
 "NeoBundle 'LucHermitte/lh-vim-lib'
