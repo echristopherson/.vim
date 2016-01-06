@@ -17,7 +17,7 @@ endfunction
 "
 " NeoBundle
 "
-call SourceIfReadable('vimrc-neobundle')
+call SourceIfReadable(b:this_dir . '/vimrc-neobundle')
 
 " See http://vim.wikia.com/wiki/Main_Page for useful help.
 " vim:sw=2
