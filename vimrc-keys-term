@@ -364,5 +364,10 @@ exec "set <A-CR>=\<Esc>\<CR>"
 " set correctly in xterm, the Xquartz version at least -- according to :h
 " backspace-delete, it should get the value from termcap/terminfo and stty.
 " stty does show it to be ^?, so maybe termcap/terminfo takes precedence.
-noremap <C-?> <BS>
-noremap! <C-?> <BS>
+" NOTE: This used to use noremap[!]; but lexima then didn't understand the
+" Delete key in terminal Vim (which seems to natively send ^? in iTerm2).
+" TODO: One of these days, clear out most of the stuff relating to xterm and
+" (especially) rxvt, since I don't really use those anymore.
+map <C-?> <BS>
+map! <C-?> <BS>
+
