@@ -233,7 +233,9 @@ let g:dbext_default_menu_mode = 2
 set shortmess-=T
 
 " Enable mouse in xterm, iTerm, etc.
-set ttymouse=xterm2
+if ! has('nvim')
+    set ttymouse=xterm2
+endif
 set mouse=a
 
 " Indentation and autoindentation settings
