@@ -609,6 +609,7 @@ highlight default link SignifySignDelete OverrideSignifySignDelete
 "let g:airline#extensions#tabline#enabled = 1
 let g:airline_left_sep=''
 let g:airline_right_sep=''
+let g:airline#extensions#wordcount#enabled = 0
 
 " Airline theme settings
 " NOTE: Besides dark, badwolf and powerlineish are pretty nice.
