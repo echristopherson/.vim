@@ -93,6 +93,7 @@ NeoBundle 'vim-scripts/a.vim'
 NeoBundle 'vim-scripts/buffergrep'
 NeoBundle 'vim-scripts/camelcasemotion'
 NeoBundle 'vim-scripts/matchit.zip'
+NeoBundle 'vim-utils/vim-husk'
 
 call neobundle#end()
 
