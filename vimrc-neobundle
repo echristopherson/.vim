@@ -94,6 +94,8 @@ NeoBundle 'vim-scripts/buffergrep'
 NeoBundle 'vim-scripts/camelcasemotion'
 NeoBundle 'vim-scripts/matchit.zip'
 NeoBundle 'vim-utils/vim-husk'
+NeoBundle 'xolox/vim-misc'
+NeoBundle 'xolox/vim-session'
 
 call neobundle#end()
 
