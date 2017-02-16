@@ -676,6 +676,7 @@ let g:SignatureMap = {
 "
 " Syntastic
 "
+let g:syntastic_always_populate_loc_list=1
 
 " For working with C++14
 " TODO: Figure out why :SyntasticInfo still shows that 'gcc' is the current
@@ -689,7 +690,6 @@ let g:syntastic_cpp_compiler="clang++"
 let g:syntastic_cpp_compiler_options="-std=c++14 -Wall -Wextra -Wno-missing-braces -Wmissing-field-initializers"
 let g:syntastic_cpp_clang_tidy_args="-std=c++14"
 let g:syntastic_cpp_clang_check_args="-std=c++14"
-let g:syntastic_always_populate_loc_list=1
 let g:syntastic_cpp_check_header=1
 
 " TODO
