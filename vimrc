@@ -678,8 +678,11 @@ let g:SignatureMap = {
 "
 
 " For working with C++14
-" TODO: Figure out why :SyntasticInfo still shows that its 'compiler' is the
-"       current checked, and whether that matters.
+" TODO: Figure out why :SyntasticInfo still shows that 'gcc' is the current
+"       checker, and whether that matters. UPDATE: It appears that the 'gcc'
+"       checker still calls out to clang++ where appropriate; it seems to
+"       exist to differentiate itself from avrgcc, clang_check, and clang_tidy
+"       (et al.).
 " TODO: Figure out whether to treat all .h files as C++. Currently that seems
 "       to be the case, but I don't see that I've set it up that way anywhere.
 let g:syntastic_cpp_compiler="clang++"
