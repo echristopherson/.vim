@@ -688,6 +688,7 @@ let g:SignatureMap = {
 let g:syntastic_cpp_compiler="clang++"
 let g:syntastic_cpp_compiler_options="-std=c++14 -Wall -Wextra -Wno-missing-braces -Wmissing-field-initializers"
 let g:syntastic_always_populate_loc_list=1
+let g:syntastic_cpp_check_header=1
 
 " TODO
 " Solarized
