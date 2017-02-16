@@ -687,6 +687,8 @@ let g:SignatureMap = {
 "       to be the case, but I don't see that I've set it up that way anywhere.
 let g:syntastic_cpp_compiler="clang++"
 let g:syntastic_cpp_compiler_options="-std=c++14 -Wall -Wextra -Wno-missing-braces -Wmissing-field-initializers"
+let g:syntastic_cpp_clang_tidy_args="-std=c++14"
+let g:syntastic_cpp_clang_check_args="-std=c++14"
 let g:syntastic_always_populate_loc_list=1
 let g:syntastic_cpp_check_header=1
 
