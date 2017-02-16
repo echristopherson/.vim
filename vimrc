@@ -673,6 +673,18 @@ let g:SignatureMap = {
   \ 'GotoPrevSpotAlpha'  :  "<Leader>`[",
   \ }
 
+"
+" Syntastic
+"
+
+" For working with C++14
+" TODO: Figure out why :SyntasticInfo still shows that its 'compiler' is the
+"       current checked, and whether that matters.
+" TODO: Figure out whether to treat all .h files as C++. Currently that seems
+"       to be the case, but I don't see that I've set it up that way anywhere.
+let g:syntastic_cpp_compiler="clang++"
+let g:syntastic_cpp_compiler_options="-std=c++14 -Wall -Wextra -Wno-missing-braces -Wmissing-field-initializers"
+
 " TODO
 " Solarized
 "
