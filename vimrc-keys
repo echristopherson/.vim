@@ -565,7 +565,7 @@ noremap <Leader>c :cd %:p:h<CR>
 noremap <Leader>l :ls<CR>
 
 " Use <F11> to force recompilation/refresh in YouCompleteMe
-noremap <silent> <f5> :silent :YcmForceCompileAndDiagnostics<CR>
+noremap <silent> <f5> :silent :YcmForceCompileAndDiagnostics<CR>:ll<CR>
 noremap <silent> <f6> :silent :YcmCompleter FixIt<CR>
 
 
