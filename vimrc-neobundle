@@ -56,7 +56,8 @@ NeoBundle 'Slava/vim-spacebars'
 "NeoBundle 'LucHermitte/lh-brackets'
 NeoBundle 'bling/vim-airline'
 NeoBundle 'chrisbra/vim-diff-enhanced'
-NeoBundle 'cohama/lexima.vim'
+" Functionality provided by delimitMate (and partially by vim-endwise):
+"NeoBundle 'cohama/lexima.vim'
 NeoBundle 'ctrlpvim/ctrlp.vim'
 "NeoBundle 'drslump/vim-syntax-js'
 NeoBundle 'easymotion/vim-easymotion'
@@ -78,8 +79,9 @@ NeoBundle 'tpope/timl'
 NeoBundle 'tpope/vim-abolish'
 NeoBundle 'tpope/vim-bundler'
 NeoBundle 'tpope/vim-dispatch'
-" Functionality provided by lexima:
-"NeoBundle 'tpope/vim-endwise'
+" Functionality provided by lexima; but I've disabled that in favor of
+" delimitMate:
+NeoBundle 'tpope/vim-endwise'
 NeoBundle 'tpope/vim-eunuch'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-ragtag'
@@ -97,6 +99,7 @@ NeoBundle 'vim-utils/vim-husk'
 NeoBundle 'xolox/vim-misc'
 NeoBundle 'xolox/vim-session'
 NeoBundle 'Valloric/YouCompleteMe'
+NeoBundle 'Raimondi/delimitMate'
 
 call neobundle#end()
 

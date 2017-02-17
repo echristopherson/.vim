@@ -692,6 +692,14 @@ let g:syntastic_cpp_clang_tidy_args="-extra-arg-before=-std=c++14"
 let g:syntastic_cpp_clang_check_args="-extra-arg-before=-std=c++14"
 let g:syntastic_cpp_check_header=1
 
+"
+" delimitMate
+"
+let g:delimitMate_expand_cr=1
+let g:delimitMate_expand_space=1
+let g:delimitMate_expand_inside_quotes=1
+let g:delimitMate_jump_expansion=1
+
 " TODO
 " Solarized
 "
