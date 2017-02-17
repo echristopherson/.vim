@@ -101,6 +101,9 @@ NeoBundle 'xolox/vim-misc'
 NeoBundle 'xolox/vim-session'
 NeoBundle 'Valloric/YouCompleteMe'
 NeoBundle 'Raimondi/delimitMate'
+" TODO: Look into these again in the future.
+"NeoBundle 'SirVer/ultisnips'
+"NeoBundle 'honza/vim-snippets'
 
 call neobundle#end()
 
