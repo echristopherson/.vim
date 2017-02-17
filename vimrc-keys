@@ -564,6 +564,9 @@ noremap <Leader>c :cd %:p:h<CR>
 " Use <Leader>l to list buffers
 noremap <Leader>l :ls<CR>
 
+" Use <F11> to force recompilation/refresh in YouCompleteMe
+noremap <silent> <f11> :silent :YcmForceCompileAndDiagnostics<CR>
+
 
 
 " Source terminal-specific key bindings
