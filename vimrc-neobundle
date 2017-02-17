@@ -98,6 +98,7 @@ NeoBundle 'vim-scripts/matchit.zip'
 NeoBundle 'vim-utils/vim-husk'
 NeoBundle 'xolox/vim-misc'
 NeoBundle 'xolox/vim-session'
+NeoBundle 'Valloric/YouCompleteMe'
 NeoBundle 'Raimondi/delimitMate'
 
 call neobundle#end()
