@@ -14,6 +14,33 @@ function! SourceIfReadable(filename)
   endif
 endfunction
 
+" Detect OS Vim is running on
+function! GetHostOS()
+  if has('win32') || has('win64')
+    return 'windows'
+  elseif has('unix')
+    let s:uname = system('uname')
+    if s:uname == "Darwin\n"
+      return 'osx'
+    else
+      " TODO: This doesn't actually distinguish Linux from BSD, etc.
+      return 'linux'
+    endif
+  endif
+endfunction
+
+function! IsHostOSWindows()
+  return GetHostOS() == 'windows'
+endfunction
+
+function! IsHostOSOSX()
+  return GetHostOS() == 'osx'
+endfunction
+
+function! IsHostOSLinux()
+  return GetHostOS() == 'linux'
+endfunction
+
 "
 " NeoBundle
 "
@@ -260,32 +287,6 @@ if $TERM_PROGRAM == 'iTerm.app'
     let &t_EI = "\<Esc>]50;CursorShape=0\x7"
   endif
 endif
-
-function! GetHostOS()
-  if has('win32') || has('win64')
-    return 'windows'
-  elseif has('unix')
-    let s:uname = system('uname')
-    if s:uname == "Darwin\n"
-      return 'osx'
-    else
-      " TODO: This doesn't actually distinguish Linux from BSD, etc.
-      return 'linux'
-    endif
-  endif
-endfunction
-
-function! IsHostOSWindows()
-  return GetHostOS() == 'windows'
-endfunction
-
-function! IsHostOSOSX()
-  return GetHostOS() == 'osx'
-endfunction
-
-function! IsHostOSLinux()
-  return GetHostOS() == 'linux'
-endfunction
 
 
 " CSApprox settings
