@@ -99,11 +99,16 @@ NeoBundle 'vim-scripts/matchit.zip'
 NeoBundle 'vim-utils/vim-husk'
 NeoBundle 'xolox/vim-misc'
 NeoBundle 'xolox/vim-session'
-NeoBundle 'Valloric/YouCompleteMe'
 NeoBundle 'Raimondi/delimitMate'
 " TODO: Look into these again in the future.
 "NeoBundle 'SirVer/ultisnips'
 "NeoBundle 'honza/vim-snippets'
+
+" Currently I don't feel like putting in the effort to get YCM working on any
+" of my Windows machines.
+if !IsHostOSWindows()
+    NeoBundle 'Valloric/YouCompleteMe'
+endif
 
 call neobundle#end()
 
