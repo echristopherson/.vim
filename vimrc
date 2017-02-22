@@ -150,6 +150,9 @@ if has("autocmd")
   " Match these words and use Todo group in any file (not just files whose
   " types assign such matches).
   autocmd WinEnter,VimEnter * :silent! call matchadd('Todo', 'TODO\|FIXME\|NOTE\|XXX', -1, 24)
+
+  " Treat .make files as make
+  autocmd BufRead,BufNewFile *.make setfile make
 endif " has("autocmd")
 
 " Override .m filetype (Obj-C instead of Matlab)
