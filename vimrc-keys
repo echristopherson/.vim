@@ -564,6 +564,10 @@ noremap <Leader>c :cd %:p:h<CR>
 " Use <Leader>l to list buffers
 noremap <Leader>l :ls<CR>
 
+" Use <Leader>b to start a bufdo command line that keeps highlighting active
+" in the buffers it touches, even if they haven't been loaded yet.
+noremap <Leader>b :<C-u>bufdo set eventignore-=Syntax\|
+
 " Use <F11> to force recompilation/refresh in YouCompleteMe
 noremap <silent> <f5> :silent :YcmForceCompileAndDiagnostics<CR>:ll<CR>
 noremap <silent> <f6> :silent :YcmCompleter FixIt<CR>
