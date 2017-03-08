@@ -565,8 +565,9 @@ noremap <Leader>c :cd %:p:h<CR>
 noremap <Leader>l :ls<CR>
 
 " Use <Leader>b to start a bufdo command line that keeps highlighting active
-" in the buffers it touches, even if they haven't been loaded yet.
-noremap <Leader>b :<C-u>bufdo set eventignore-=Syntax\|
+" in the buffers it touches, even if they haven't been loaded yet. Also
+" restores the # and % buffers afterward.
+noremap <Leader>b :<C-u>let g:bufdo_bufnr=bufnr('%') \| let g:bufdo_bufnr_prev=bufnr('#') \| bufdo set eventignore-=Syntax \|  \| exec 'buffer '.g:bufdo_bufnr_prev \| exec 'buffer '.g:bufdo_bufnr<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
 
 " Use <F11> to force recompilation/refresh in YouCompleteMe
 noremap <silent> <f5> :silent :YcmForceCompileAndDiagnostics<CR>:ll<CR>
