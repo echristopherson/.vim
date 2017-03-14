@@ -573,6 +573,17 @@ noremap <Leader>b :<C-u>let g:bufdo_bufnr=bufnr('%') \| let g:bufdo_bufnr_prev=b
 noremap <silent> <f5> :silent :YcmForceCompileAndDiagnostics<CR>:ll<CR>
 noremap <silent> <f6> :silent :YcmCompleter FixIt<CR>
 
+" Use <A-Space> as usual in Windows. Currently, without this, physically
+" pressing <A-Space> causes the cursor to flash, but nothing happens. It's
+" supposed to pull down the Windows window operation menu like it does in
+" other apps.
+if IsHostOSWindows()
+    :nnoremap <A-Space> :simalt ~<CR>
+    " Unfortunately this has a slight defect, in that using <C-o> at the end
+    " of a line with only whitespace preceding causes the cursor to end up at
+    " the very beginning of the line.
+    :inoremap <A-Space> <C-o>:simalt ~<CR>
+endif
 
 
 " Source terminal-specific key bindings
