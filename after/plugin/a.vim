@@ -38,9 +38,12 @@ let alternateNoDefaultAlternate = 1
 " Convert paths to relative
 let g:alternateRelativeFiles = 1
 
-" Add mappings for Objective-C
+" Add mappings for Objective-C, Arduino, C++, etc.
 let g:alternateExtensions_m = 'h'
 let g:alternateExtensions_mm = 'h'
-let g:alternateExtensions_h = 'c,cpp,cxx,cc,CC,C,m,mm'
+let g:alternateExtensions_ino = 'h'
+let g:alternateExtensions_cpp = 'hpp'
+let g:alternateExtensions_hpp = 'cpp'
+let g:alternateExtensions_h = 'c,cpp,cxx,cc,CC,C,m,mm,ino'
 
 " TODO: get a.vim to stop chdir:ing!!!
