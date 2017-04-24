@@ -565,13 +565,25 @@ noremap <Leader>c :cd %:p:h<CR>
 noremap <Leader>l :ls<CR>
 
 " Use <Leader>b to start a bufdo command line that keeps highlighting active
-" in the buffers it touches, even if they haven't been loaded yet.
-noremap <Leader>b :<C-u>bufdo set eventignore-=Syntax\|
+" in the buffers it touches, even if they haven't been loaded yet. Also
+" restores the # and % buffers afterward.
+noremap <Leader>b :<C-u>let g:bufdo_bufnr=bufnr('%') \| let g:bufdo_bufnr_prev=bufnr('#') \| bufdo set eventignore-=Syntax \|  \| exec 'buffer '.g:bufdo_bufnr_prev \| exec 'buffer '.g:bufdo_bufnr<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
 
 " Use <F11> to force recompilation/refresh in YouCompleteMe
 noremap <silent> <f5> :silent :YcmForceCompileAndDiagnostics<CR>:ll<CR>
 noremap <silent> <f6> :silent :YcmCompleter FixIt<CR>
 
+" Use <A-Space> as usual in Windows. Currently, without this, physically
+" pressing <A-Space> causes the cursor to flash, but nothing happens. It's
+" supposed to pull down the Windows window operation menu like it does in
+" other apps.
+if IsHostOSWindows()
+    :nnoremap <A-Space> :simalt ~<CR>
+    " Unfortunately this has a slight defect, in that using <C-o> at the end
+    " of a line with only whitespace preceding causes the cursor to end up at
+    " the very beginning of the line.
+    :inoremap <A-Space> <C-o>:simalt ~<CR>
+endif
 
 
 " Source terminal-specific key bindings
