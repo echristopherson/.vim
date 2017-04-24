@@ -100,6 +100,7 @@ NeoBundle 'vim-utils/vim-husk'
 NeoBundle 'xolox/vim-misc'
 NeoBundle 'xolox/vim-session'
 NeoBundle 'Raimondi/delimitMate'
+NeoBundle 'vim-scripts/Align'
 " TODO: Look into these again in the future.
 "NeoBundle 'SirVer/ultisnips'
 "NeoBundle 'honza/vim-snippets'
