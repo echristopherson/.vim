@@ -585,6 +585,10 @@ if IsHostOSWindows()
     :inoremap <A-Space> <C-o>:simalt ~<CR>
 endif
 
+" Mappings to change settings related to hard tabs/spaces
+nnoremap <Leader><Tab> :set listchars-=tab:→\  listchars+=tab:\ \  noexpandtab ts=8 sts=8 sw=8<CR>
+nnoremap <Leader><C-o> :set listchars-=tab:\ \  listchars+=tab:→\  expandtab ts=8 sts=4 sw=4<CR>
+nnoremap <Leader><C-p> :set listchars-=tab:→\  listchars+=tab:\ \  noexpandtab ts=4 sts=4 sw=4<CR>
 
 " Source terminal-specific key bindings
 " TODO: Actually, "terminal-specific" isn't valid anymore, since I'm going to
