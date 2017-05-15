@@ -583,7 +583,7 @@ let g:ctrlp_mruf_exclude = '\v(^|[\\\/])\.git[\\\/](index|COMMIT_EDITMSG)$'
 " Restore cursor position in window upon returning to buffer
 if v:version >= 700
   au BufLeave * let b:winview = winsaveview()
-  au BufEnter * if(exists('b:winview')) | call winrestview(b:winview) | endif
+  au BufEnter * if(!&scrollbind && exists('b:winview')) | call winrestview(b:winview) | endif
 endif
 
 " Change <C-p> keybind so it opens MRU window. That way I don't have to wait
