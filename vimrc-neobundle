@@ -61,7 +61,9 @@ NeoBundle 'chrisbra/vim-diff-enhanced'
 NeoBundle 'ctrlpvim/ctrlp.vim'
 "NeoBundle 'drslump/vim-syntax-js'
 NeoBundle 'easymotion/vim-easymotion'
-NeoBundle 'godlygeek/csapprox'
+" Disabling for now, since I rarely change color schemes, I found out I can
+" precalculate a 256-color scheme, and it's slow to load
+"NeoBundle 'godlygeek/csapprox'
 NeoBundle 'gregsexton/gitv'
 NeoBundle 'jtratner/vim-flavored-markdown'
 NeoBundle 'kana/vim-textobj-user'

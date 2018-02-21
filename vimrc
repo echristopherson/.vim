@@ -96,7 +96,7 @@ if &t_Co > 2 || has("gui_running")
   syntax on
   set hlsearch
   if &t_Co >= 256 || has("gui_running")
-    colorscheme ir_gray-EAC
+    colorscheme ir_gray-EAC-256color
   endif
 endif
 
