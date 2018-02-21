@@ -704,6 +704,11 @@ let g:delimitMate_expand_space=1
 let g:delimitMate_expand_inside_quotes=1
 let g:delimitMate_jump_expansion=1
 
+"
+" vim-session
+"
+let g:session_autosave = 'no'
+
 " TODO: Currently endwise's <CR> mapping stomps on that of delimitMate, which
 " makes g:delimitMate_expand_cr=1 not work as intended. I haven't found a good
 " way to disable that yet.
