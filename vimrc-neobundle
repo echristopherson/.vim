@@ -74,7 +74,8 @@ NeoBundle 'michaeljsmith/vim-indent-object'
 NeoBundle 'nelstrom/vim-textobj-rubyblock'
 NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'rking/ag.vim'
-NeoBundle 'scrooloose/nerdtree'
+" Disabling for now, since I don't use it much, and it's slow to load
+"NeoBundle 'scrooloose/nerdtree'
 " Disabling for now, since it doesn't really get along with YouCompleteMe
 "NeoBundle 'scrooloose/syntastic'
 NeoBundle 'taiansu/nerdtree-ag'
