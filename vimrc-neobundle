@@ -111,6 +111,8 @@ if !IsHostOSWindows()
     NeoBundle 'Valloric/YouCompleteMe'
 endif
 
+NeoBundle 'tweekmonster/startuptime.vim'
+
 call neobundle#end()
 
 " Required:
