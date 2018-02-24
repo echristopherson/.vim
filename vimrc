@@ -41,11 +41,6 @@ function! IsHostOSLinux()
   return GetHostOS() == 'linux'
 endfunction
 
-"
-" NeoBundle
-"
-call SourceIfReadable(b:this_dir . '/vimrc-neobundle')
-
 " See http://vim.wikia.com/wiki/Main_Page for useful help.
 " vim:sw=2
 
