@@ -89,6 +89,8 @@ if !IsHostOSWindows()
 endif
 
 call minpac#add('tweekmonster/startuptime.vim')
+call minpac#add('junegunn/fzf')
+call minpac#add('junegunn/fzf.vim')
 
 " Prompt to remove things not listed here.
 call minpac#clean()
