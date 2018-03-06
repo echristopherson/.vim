@@ -382,34 +382,34 @@ endfunction
 " TODO (next two functions): Catch when user cancels and act accordingly
 
 " Close buffer but keep window open
-function! WipeOutBufferOnly()
+function! DeleteBufferOnly()
     if CountListedBuffers() != 1
         if bufexists(0) && buflisted(0) " alternate buffer exists and is listed
             buffer #
-            confirm bwipeout #
+            confirm bdelete #
         else
             bprevious
-            confirm bwipeout #
+            confirm bdelete #
         endif
     else " this is the only buffer
         enew
-        confirm bwipeout #
+        confirm bdelete #
     endif
 endfunction
 
-nnoremap <silent> <Leader>q :call WipeOutBufferOnly()<CR>
+nnoremap <silent> <Leader>q :call DeleteBufferOnly()<CR>
 
 " Close buffer and current window
 " TODO: Catch last open window
-function! WipeOutBufferAndClose()
+function! DeleteBufferAndClose()
     bprevious
-    confirm bwipeout #
+    confirm bdelete #
     close
 endfunction
 
 " Unfortunately <D-w> seems to be set in Cocoa, and is unable to occur in a
 " binding after another character.
-nnoremap <silent> <Leader>Q :call WipeOutBufferAndClose()<CR>
+nnoremap <silent> <Leader>Q :call DeleteBufferAndClose()<CR>
 
 " Preserve functionality of `,` while allowing it to be used as a prefix char
 noremap ,, ,
