@@ -45,8 +45,12 @@ call minpac#add('mattn/gist-vim')
 call minpac#add('mattn/webapi-vim')
 call minpac#add('michaeljsmith/vim-indent-object')
 call minpac#add('nelstrom/vim-textobj-rubyblock')
-call minpac#add('pangloss/vim-javascript')
-call minpac#add('rking/ag.vim')
+call minpac#add('pangloss/vim-javascript', {'type': 'opt'})
+" Deprecated some time in 2016
+"call minpac#add('rking/ag.vim')
+" Use "official" ack.vim instead (but with ag as backend, and with :*Ag*
+" commands); see vimrc/init.vim and vimrc-keys for additional config.
+call minpac#add('mileszs/ack.vim')
 " Disabling for now, since I don't use it much, and it's slow to load
 "call minpac#add('scrooloose/nerdtree')
 " Disabling for now, since it doesn't really get along with YouCompleteMe
