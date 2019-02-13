@@ -336,6 +336,9 @@ if 0
       let g:NERDTreeWinSize = &columns - 80 - 1
     endif
 
+    " Use Ag (the Silver Searcher) instead of Ack for searching
+    let g:path_to_search_app = "ag"
+
     " TODO: I'm experimenting with this. Figure out if it's worth keeping. If
     " NOTE: Nope; this is flaky so far. Too bad.
     " so:
@@ -595,8 +598,6 @@ let g:ctrlp_cmd = 'CtrlPMRU'
 " <http://www.vim.org/scripts/script.php?script_id=2075>.
 let g:html_indent_inctags = "html,body,head,tbody,p"
 
-" Use Ag (the Silver Searcher) instead of Ack for searching
-let g:path_to_search_app = "ag"
 " Don't show help text each time ag is triggered
 let g:ag_mapping_message = 0
 
