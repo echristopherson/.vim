@@ -70,7 +70,7 @@ endif
 " an external process.
 set undoreload=-1
 
-set history=50          " keep 50 lines of command line history
+set history=5000        " keep 5000 lines of command line history
 set ruler               " show the cursor position all the time
 set showcmd             " display incomplete commands
 set incsearch           " do incremental searching
