@@ -336,7 +336,7 @@ if 0
       let g:NERDTreeWinSize = &columns - 80 - 1
     endif
 
-    " Use Ag (the Silver Searcher) instead of Ack for searching
+    " Use Ag (the Silver Searcher) instead of Ack for searching with ack.vim
     let g:path_to_search_app = "ag"
 
     " TODO: I'm experimenting with this. Figure out if it's worth keeping. If
@@ -597,6 +597,59 @@ let g:ctrlp_cmd = 'CtrlPMRU'
 " Add more HTML tags to built-in indentation rules; see
 " <http://www.vim.org/scripts/script.php?script_id=2075>.
 let g:html_indent_inctags = "html,body,head,tbody,p"
+
+"
+" ack.vim
+"
+" Use Ag (the Silver Searcher) instead of Ack for searching with ack.vim
+let g:ackprg = 'ag --vimgrep'
+" TODO: Commands from ag.vim/plugin/ag.vim:
+" In ag.vim but NOT in ack.vim
+"command! -bang -nargs=* -complete=file AgBuffer call ag#AgBuffer('grep<bang>',<q-args>)
+"command! -bang -nargs=* -complete=file LAgBuffer call ag#AgBuffer('lgrep<bang>',<q-args>)
+" AgBuffer is defined as:
+"function! ag#AgBuffer(cmd, args)
+"  let l:bufs = filter(range(1, bufnr('$')), 'buflisted(v:val)')
+"  let l:files = []
+"  for buf in l:bufs
+"    let l:file = fnamemodify(bufname(buf), ':p')
+"    if !isdirectory(l:file)
+"      call add(l:files, l:file)
+"    endif
+"  endfor
+"  call ag#Ag(a:cmd, a:args . ' ' . join(l:files, ' '))
+"endfunction
+" Here are its docs:
+"":AgBuffer[!] [options] {pattern}                                    *:AgBuffer*
+""
+""    Search for {pattern} in all open buffers. Behaves just like the |:grep|
+""    command, but will open the |Quickfix| window for you. If [!] is not given
+""    the first error is jumped to.
+""
+""    Note: this will not find changes in modified buffers, since ag can only
+""    find what is on disk! You can save buffers automatically when searching
+""    with the 'autowrite' option. A buffer will be ignored if it is a directory
+""    (an explorer, like netrw).
+""
+"":LAgBuffer [options] {pattern}                                     *:LAgBuffer*
+""
+""    Just like |:AgBuffer| but instead of the |quickfix| list, matches are
+""    placed in the current |location-list|.
+" TODO: See how to add this on in my own scripts so it acts as if it were part
+" of ack.vim.
+
+" *Ag* aliases for *Ack* commands defined in ack.vim/plugin/ack.vim
+command! -bang -nargs=* -complete=file Ag           call ack#Ack('grep<bang>', <q-args>)
+command! -bang -nargs=* -complete=file AgAdd        call ack#Ack('grepadd<bang>', <q-args>)
+command! -bang -nargs=* -complete=file AgFromSearch call ack#AckFromSearch('grep<bang>', <q-args>)
+command! -bang -nargs=* -complete=file LAg          call ack#Ack('lgrep<bang>', <q-args>)
+command! -bang -nargs=* -complete=file LAgAdd       call ack#Ack('lgrepadd<bang>', <q-args>)
+command! -bang -nargs=* -complete=file AgFile       call ack#Ack('grep<bang> -g', <q-args>)
+command! -bang -nargs=* -complete=help AgHelp       call ack#AckHelp('grep<bang>', <q-args>)
+command! -bang -nargs=* -complete=help LAgHelp      call ack#AckHelp('lgrep<bang>', <q-args>)
+" These two weren't part of ag.vim
+command! -bang -nargs=*                AgWindow     call ack#AckWindow('grep<bang>', <q-args>)
+command! -bang -nargs=*                LAgWindow    call ack#AckWindow('lgrep<bang>', <q-args>)
 
 " Commented out; not using ag.vim anymore (deprecated in favor of ack.vim)
 if 0
