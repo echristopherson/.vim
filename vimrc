@@ -303,65 +303,69 @@ let g:CSApprox_verbose_level = 0
 "
 " NERD Tree settings
 "
-if has("autocmd")
-  " In NERDTree tree buffers and quickfix buffers, don't number lines; don't
-  " force cursor away from top or bottom of view; highlight cursor line.
-  if exists('+relativenumber')
-    autocmd FileType nerdtree,qf setl nornu
-  endif
-  autocmd FileType nerdtree,qf setl nonu scrolloff=0 cursorline
-endif
-" Allow single-clicking to open dirs/files in NERD Tree
-"let NERDTreeMouseMode=3
-" Allow single-clicking to open dirs open in NERD Tree
-" TODO: NERD Tree seems to have a bug where dragging to resize the split ends
-" up collapsing the tree, at least if you haven't already done any
-" collapsing/expanding. Fix that.
-let NERDTreeMouseMode = 2
-" Make NERD Tree change working directory to whatever the tree's root is
-let NERDTreeChDirMode = 2
-" Use arrows instead of old +~| characters for tree
-let g:NERDTreeDirArrows = 1
-" Leave at least 80 columns in main window.
-" TODO: Find some way to have it automatically adjust when window is resized.
-" TODO: Also take into account number of columns taken by line numbers, if
-" used.
-" TODO: Fix this so it doesn't set the NERD Tree window to 1 column wide in
-" MacVim/gvim.
-if &columns < 80 + 31 + 1 " tree width is normally 31 by default; 1 more for divider
-  let g:NERDTreeWinSize = &columns - 80 - 1
-endif
+" Commented out; not using NERDTree for the time being.
+" TODO: See if I want to retain the quickfix-related settings here. If so,
+" extract them from here and wrap them in a proper augroup.
+if 0
+    if has("autocmd")
+      " In NERDTree tree buffers and quickfix buffers, don't number lines; don't
+      " force cursor away from top or bottom of view; highlight cursor line.
+      if exists('+relativenumber')
+        autocmd FileType nerdtree,qf setl nornu
+      endif
+      autocmd FileType nerdtree,qf setl nonu scrolloff=0 cursorline
+    endif
+    " Allow single-clicking to open dirs/files in NERD Tree
+    "let NERDTreeMouseMode=3
+    " Allow single-clicking to open dirs open in NERD Tree
+    " TODO: NERD Tree seems to have a bug where dragging to resize the split ends
+    " up collapsing the tree, at least if you haven't already done any
+    " collapsing/expanding. Fix that.
+    let NERDTreeMouseMode = 2
+    " Make NERD Tree change working directory to whatever the tree's root is
+    let NERDTreeChDirMode = 2
+    " Use arrows instead of old +~| characters for tree
+    let g:NERDTreeDirArrows = 1
+    " Leave at least 80 columns in main window.
+    " TODO: Find some way to have it automatically adjust when window is resized.
+    " TODO: Also take into account number of columns taken by line numbers, if
+    " used.
+    " TODO: Fix this so it doesn't set the NERD Tree window to 1 column wide in
+    " MacVim/gvim.
+    if &columns < 80 + 31 + 1 " tree width is normally 31 by default; 1 more for divider
+      let g:NERDTreeWinSize = &columns - 80 - 1
+    endif
 
-" TODO: I'm experimenting with this. Figure out if it's worth keeping. If
-" NOTE: Nope; this is flaky so far. Too bad.
-" so:
-" TODO: make it scroll to show highlighted file;
-" TODO: make it not always expand directories
-" TODO: make it behave nicely with files in multiple directory trees
-" From
-" <http://superuser.com/questions/195022/vim-how-to-synchronize-nerdtree-with-current-opened-tab-file-path>.
-"if has("autocmd")
-"  " returns true iff is NERDTree open/active
-"  function! rc:isNTOpen()
-"    return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
-"  endfunction
-"
-"  " returns true iff focused window is NERDTree window
-"  function! rc:isNTFocused()
-"    return -1 != match(expand('%'), 'NERD_Tree')
-"  endfunction
-"
-"  " calls NERDTreeFind iff NERDTree is active, current window contains a modifiable file, and we're not in vimdiff
-"  function! rc:syncTree()
-"    if &modifiable && rc:isNTOpen() && !rc:isNTFocused() && strlen(expand('%')) > 0 && !&diff
-"      NERDTreeFind
-"      wincmd p
-"    endif
-"  endfunction
-"
-"  autocmd BufEnter * call rc:syncTree()
-"endif
-
+    " TODO: I'm experimenting with this. Figure out if it's worth keeping. If
+    " NOTE: Nope; this is flaky so far. Too bad.
+    " so:
+    " TODO: make it scroll to show highlighted file;
+    " TODO: make it not always expand directories
+    " TODO: make it behave nicely with files in multiple directory trees
+    " From
+    " <http://superuser.com/questions/195022/vim-how-to-synchronize-nerdtree-with-current-opened-tab-file-path>.
+    "if has("autocmd")
+    "  " returns true iff is NERDTree open/active
+    "  function! rc:isNTOpen()
+    "    return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
+    "  endfunction
+    "
+    "  " returns true iff focused window is NERDTree window
+    "  function! rc:isNTFocused()
+    "    return -1 != match(expand('%'), 'NERD_Tree')
+    "  endfunction
+    "
+    "  " calls NERDTreeFind iff NERDTree is active, current window contains a modifiable file, and we're not in vimdiff
+    "  function! rc:syncTree()
+    "    if &modifiable && rc:isNTOpen() && !rc:isNTFocused() && strlen(expand('%')) > 0 && !&diff
+    "      NERDTreeFind
+    "      wincmd p
+    "    endif
+    "  endfunction
+    "
+    "  autocmd BufEnter * call rc:syncTree()
+    "endif
+endif
 
 "
 " Vimwiki settings
