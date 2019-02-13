@@ -73,7 +73,8 @@ call minpac#add('tpope/vim-repeat')
 call minpac#add('tpope/vim-surround')
 call minpac#add('tpope/vim-unimpaired')
 call minpac#add('vim-scripts/ZoomWin')
-call minpac#add('vim-scripts/a.vim')
+" Disabled -- its functionality is mostly superseded by vim-projectionist
+"call minpac#add('vim-scripts/a.vim')
 call minpac#add('vim-scripts/buffergrep', {'type': 'opt'})
 call minpac#add('vim-scripts/camelcasemotion')
 call minpac#add('vim-scripts/matchit.zip')
@@ -94,6 +95,9 @@ if !IsHostOSWindows()
 endif
 
 call minpac#add('tweekmonster/startuptime.vim')
+call minpac#add('junegunn/fzf')
+call minpac#add('junegunn/fzf.vim')
+call minpac#add('tpope/vim-projectionist')
 
 " Prompt to remove things not listed here.
 call minpac#clean()
