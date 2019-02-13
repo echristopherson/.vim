@@ -598,8 +598,11 @@ let g:ctrlp_cmd = 'CtrlPMRU'
 " <http://www.vim.org/scripts/script.php?script_id=2075>.
 let g:html_indent_inctags = "html,body,head,tbody,p"
 
-" Don't show help text each time ag is triggered
-let g:ag_mapping_message = 0
+" Commented out; not using ag.vim anymore (deprecated in favor of ack.vim)
+if 0
+    " Don't show help text each time ag is triggered
+    let g:ag_mapping_message = 0
+endif
 
 " Signify (Sy)
 " Override sign column signs
