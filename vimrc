@@ -66,6 +66,14 @@ else
   set backup            " keep a backup file
 endif
 
+" Keep swap files in one place
+" Default is something like (on Windows):
+"let &directory = '.,C:\Users\ECHRIS~1\AppData\Local\Temp,c:\tmp,c:\temp,C:/Users/ECHRIS~1/AppData/Local/Temp'
+" The trailing // makes it encode the original pathname in the swap file name
+" (the way undo files are named by default).
+let &directory = b:this_dir . '/swp//'
+set swapfile
+
 " Allow u to undo reloading of a file, including when the file is changed by
 " an external process.
 set undoreload=-1
