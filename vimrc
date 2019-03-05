@@ -603,6 +603,12 @@ let g:html_indent_inctags = "html,body,head,tbody,p"
 "
 " Use Ag (the Silver Searcher) instead of Ack for searching with ack.vim
 let g:ackprg = 'ag --vimgrep'
+
+" Use ag for :grep
+" From ag(1) man page
+set grepprg=ag\ --vimgrep\ $*
+set grepformat=%f:%l:%c:%m
+
 " TODO: Commands from ag.vim/plugin/ag.vim:
 " In ag.vim but NOT in ack.vim
 "command! -bang -nargs=* -complete=file AgBuffer call ag#AgBuffer('grep<bang>',<q-args>)
