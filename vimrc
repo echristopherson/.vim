@@ -715,16 +715,6 @@ endfunction
 " affected.
 set shellslash
 
-" In Windows, add $TEMP (which is normally %USERPROFILE%\AppData\Local\Temp)
-" to 'directory' (the setting that tells Vim where to put temp files; normally
-" .,c:\tmp,c:\temp.
-" TODO: I had an old note that this messed up NeoVim. Check whether this is
-" still true (and, if so, in what way).
-" TODO: We might want to take out `.`.
-if IsHostOSWindows()
-    set directory+=$TEMP
-endif
-
 "
 " Fugitive
 "
