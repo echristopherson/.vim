@@ -217,8 +217,6 @@ function! NvicoMapMeta(key, cmd, add_gv)
     " equivalent.
     let l:keycode = "<A-" . a:key . ">"
 
-    let l:set_line = "set " . l:keycode . "=\<Esc>" . a:key
-
     let l:nmap_line = 'nmap <silent> <special> ' . l:keycode . ' ' . a:cmd
     let l:vmap_line = 'vmap <silent> <special> ' . l:keycode . ' <Esc>' . l:keycode
     if(a:add_gv)
@@ -228,7 +226,6 @@ function! NvicoMapMeta(key, cmd, add_gv)
     let l:cmap_line = 'cmap <special> ' . l:keycode . ' <C-c>' . l:keycode
     let l:omap_line = 'omap <silent> <special> ' . l:keycode . ' <Esc>' . l:keycode
 
-    "echo l:set_line
     "echo l:nmap_line
     "echo l:vmap_line
     "echo l:imap_line
@@ -236,7 +233,6 @@ function! NvicoMapMeta(key, cmd, add_gv)
     "echo l:omap_line
     "echo
 
-    exec l:set_line
     exec l:nmap_line
     exec l:vmap_line
     exec l:imap_line
@@ -272,15 +268,12 @@ call NvicoMapMeta('z', 'u', 1)
 
 call NvicoMapMeta('Z', '<C-r>', 1)
 
-exec "set <A-x>=\<Esc>x"
 vnoremap <special> <A-x> "+x
 
-exec "set <A-c>=\<Esc>c"
 vnoremap <special> <A-c> "+y
 " TODO: C-y doesn't seem to do anything on the command line.
 cnoremap <special> <A-c> <C-y>
 
-exec "set <A-v>=\<Esc>v"
 nnoremap <silent> <special> <A-v> "+gP
 cnoremap <special> <A-v> <C-r>+
 execute 'vnoremap <silent> <script> <special> <A-v>' paste#paste_cmd['v']
@@ -356,9 +349,6 @@ call NvicoMapMeta("\<C-p>", ':cN<CR>', 0)
 " much.
 "call NvicoMapMeta('', ':cold<CR>', 1)
 "call NvicoMapMeta('', ':cnew<CR>', 1)
-
-" Opt+Return in OS X Terminal
-exec "set <A-CR>=\<Esc>\<CR>"
 
 " Explicitly set DEL as backspace character. For some reason this doesn't get
 " set correctly in xterm, the Xquartz version at least -- according to :h

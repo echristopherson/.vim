@@ -99,14 +99,6 @@ endfunction
 " Example usage:
 "call MapMeta('map', '<Left>', 'w')
 
-" Create a key code for meta+supplied character, if in a terminal. (Not
-" necessary in the GUI.)
-function! MakeMetaCharacter(char)
-    if !has('gui_running')
-        exec "set <A-" . a:char . ">=\<Esc>" . a:char
-    endif
-endfunction
-
 " Set pastetoggle key. This allows us to paste code into terminal vim without
 " vim autoindenting it (in addition to its original intendation).
 " See <http://vim.wikia.com/wiki/VimTip906>.
@@ -266,31 +258,21 @@ map <silent> ,e <Plug>CamelCaseMotion_e
 
 " Additional cursor movement goodness
 " Opt+j/k - work like Ctrl+Left/Right
-call MakeMetaCharacter('j')
-call MakeMetaCharacter('k')
 map  <A-j> <C-Left>
 map! <A-j> <C-Left>
 map  <A-k> <C-Right>
 map! <A-k> <C-Right>
 " Opt+h/l - work like Opt+Left/Right
-call MakeMetaCharacter('h')
-call MakeMetaCharacter('l')
 map  <A-h> <A-Left>
 map! <A-h> <A-Left>
 map  <A-l> <A-Right>
 map! <A-l> <A-Right>
 " Opt+u/i - work like Opt+Up/Down
-call MakeMetaCharacter('u')
-call MakeMetaCharacter('i')
 map  <A-u> <A-Up>
 map! <A-u> <A-Up>
 map  <A-i> <A-Down>
 map! <A-i> <A-Down>
 " Shift+Opt+hjkl - work like hjkl in normal mode
-call MakeMetaCharacter('H')
-call MakeMetaCharacter('J')
-call MakeMetaCharacter('K')
-call MakeMetaCharacter('L')
 map  <A-H> <Left>
 map! <A-H> <Left>
 map  <A-J> <Down>
@@ -363,7 +345,6 @@ function! Unblockify()
     endif
 endfunction
 
-call MakeMetaCharacter('%')
 noremap <silent> <A-%> :call Unblockify()<CR>
 
 " [\ and ]\ switch buffers

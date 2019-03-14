@@ -19,10 +19,10 @@ call minpac#add('k-takata/minpac', {'type': 'opt'})
 "\     'unix' : 'gmake',
 "\    },
 "\ }
-call minpac#add('Shougo/vimproc.vim', {'type': 'opt', 'do': 'make'})
-call minpac#add('Shougo/unite.vim', {'type': 'opt'})
-call minpac#add('Shougo/neomru.vim', {'type': 'opt'})
-call minpac#add('Slava/vim-spacebars', {'type': 'opt'})
+call minpac#add('Shougo/vimproc.vim', {'do': 'make'})
+call minpac#add('Shougo/unite.vim')
+call minpac#add('Shougo/neomru.vim')
+call minpac#add('Slava/vim-spacebars')
 "call minpac#add('LucHermitte/lh-vim-lib')
 "call minpac#add('LucHermitte/lh-tags')
 "call minpac#add('LucHermitte/lh-dev')
@@ -37,13 +37,13 @@ call minpac#add('easymotion/vim-easymotion')
 " Disabling for now, since I rarely change color schemes, I found out I can
 " precalculate a 256-color scheme, and it's slow to load
 "call minpac#add('godlygeek/csapprox')
-call minpac#add('gregsexton/gitv', {'type': 'opt'})
-call minpac#add('jtratner/vim-flavored-markdown', {'type': 'opt'})
+call minpac#add('gregsexton/gitv')
+call minpac#add('jtratner/vim-flavored-markdown')
 call minpac#add('kana/vim-textobj-user')
 call minpac#add('kshenoy/vim-signature')
-call minpac#add('mattn/gist-vim', {'type': 'opt'})
-call minpac#add('mattn/webapi-vim', {'type': 'opt'})
-call minpac#add('michaeljsmith/vim-indent-object', {'type': 'opt'})
+call minpac#add('mattn/gist-vim')
+call minpac#add('mattn/webapi-vim')
+call minpac#add('michaeljsmith/vim-indent-object')
 call minpac#add('nelstrom/vim-textobj-rubyblock')
 call minpac#add('pangloss/vim-javascript', {'type': 'opt'})
 " Deprecated some time in 2016
@@ -57,18 +57,18 @@ call minpac#add('mileszs/ack.vim')
 "call minpac#add('scrooloose/syntastic')
 " Don't need this if I'm not using NERDTree
 "call minpac#add('taiansu/nerdtree-ag')
-call minpac#add('tpope/timl', {'type': 'opt'})
-call minpac#add('tpope/vim-abolish', {'type': 'opt'})
-call minpac#add('tpope/vim-bundler', {'type': 'opt'})
-call minpac#add('tpope/vim-dispatch', {'type': 'opt'})
+call minpac#add('tpope/timl')
+call minpac#add('tpope/vim-abolish')
+call minpac#add('tpope/vim-bundler')
+call minpac#add('tpope/vim-dispatch')
 " Functionality provided by lexima; but I've disabled that in favor of
 " delimitMate:
 call minpac#add('tpope/vim-endwise')
 call minpac#add('tpope/vim-eunuch')
-call minpac#add('tpope/vim-fugitive', {'type': 'opt'})
-call minpac#add('tpope/vim-ragtag', {'type': 'opt'})
-call minpac#add('tpope/vim-rails', {'type': 'opt'})
-call minpac#add('tpope/vim-rake', {'type': 'opt'})
+call minpac#add('tpope/vim-fugitive')
+call minpac#add('tpope/vim-ragtag')
+call minpac#add('tpope/vim-rails')
+call minpac#add('tpope/vim-rake')
 call minpac#add('tpope/vim-repeat')
 call minpac#add('tpope/vim-surround')
 call minpac#add('tpope/vim-unimpaired')
@@ -91,6 +91,7 @@ call minpac#add('devjoe/vim-codequery')
 " Currently I don't feel like putting in the effort to get YCM working on any
 " of my Windows machines.
 if !IsHostOSWindows()
+    " Make optional, since it affects launch time noticeably.
     call minpac#add('Valloric/YouCompleteMe', {'type': 'opt'})
 endif
 
@@ -98,6 +99,7 @@ call minpac#add('tweekmonster/startuptime.vim')
 call minpac#add('junegunn/fzf')
 call minpac#add('junegunn/fzf.vim')
 call minpac#add('tpope/vim-projectionist')
+call minpac#add('radenling/vim-dispatch-neovim')
 
 " Prompt to remove things not listed here.
 call minpac#clean()
