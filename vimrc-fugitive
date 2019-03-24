@@ -1,0 +1,7 @@
+"
+" Fugitive
+"
+
+" Always split vertically (this affects Vim in general, but it's most
+" noticeable for me in fugitive).
+set diffopt+=vertical

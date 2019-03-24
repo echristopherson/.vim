@@ -1,25 +1,5 @@
 """ Key bindings """
 
-" Disable MacVim default GUI cursor key bindings, to make the GUI bindings
-" work the same as the ones I've set for the terminal. Not sure why this
-" setting needs to go in .vimrc and not .gvimrc, but it does. Maybe .vimrc
-" gets read beforer .gvimrc. See $VIM/gvimrc.
-let macvim_skip_cmd_opt_movement = 1
-
-" TODO: Reenable macvim_hig_shift_movement eventually. For now I'll just code
-" Mac cursor key bindings myself.
-" TODO: Make a function to go to first nonblank character on first keypress,
-" and first character on second.
-" TODO: Set Opt+Up/Down to beginning/end of paragraph (or just use
-" macvim_skip_cmd_opt_movement).
-" TODO: Make Opt+Right go to end of line when on last word.
-if has('gui_running') && has('gui_macvim')
-    noremap  <D-Left> <Home>
-    noremap! <D-Left> <Home>
-    noremap  <D-Right> <End>
-    noremap! <D-Right> <End>
-endif
-
 " Turn various timeout types on or off
 set timeout " time out on :mappings and key codes
 set ttimeout " time out on key codes
@@ -36,10 +16,6 @@ set ttimeoutlen=100
 
 " Map \ as <Leader>
 let mapleader='\'
-
-" Help in a new tab instead of a window
-noremap  <silent> <F1> :tab help<CR>
-inoremap <silent> <F1> <C-o>:tab help<CR>
 
 " Toggle enable/disable custom keymap in insert mode and search command line
 " TODO: See if this does anything different from CTRL-^ in insert mode.
@@ -63,47 +39,6 @@ function! ToggleKeymap()
     endif
 endfunction
 
-noremap <silent> <F10> :call ToggleKeymap()<CR>
-inoremap <silent> <F10> <C-o>:call ToggleKeymap()<CR>
-
-" Turn off highlighting of search results
-noremap  <silent> <F12> :nohl<CR>
-inoremap <silent> <F12> <C-o>:nohl<CR>
-
-" Allow shift+arrow to start visual mode. Also see $VIM/gvimrc.
-" let macvim_hig_shift_movement = 1
-
-" A little function from Raimondi on Freenode #vim; this automatically takes
-" care of binding to <Esc> or <A-> depending on the vim type.
-" I just found out it's also possible to use something like the following:
-"   set <M-a>=<Esc>a
-" But I don't know a way to set M-... to <Esc>... across the board.
-" TODO: Remove. This function is becoming obsolete in my config.
-function! MapMeta(cmd, lhs, rhs)
-    "if has('gui_running')
-    let l:lhs_has_brackets=0
-    if match(a:lhs, '^<.\+>') == 0
-        let l:lhs = substitute(a:lhs, '^<', '', '')
-        let l:lhs_has_brackets=1
-    else
-        let l:lhs = a:lhs
-    endif
-    let l:cmd_line = a:cmd . ' <A-' . l:lhs
-    if !l:lhs_has_brackets
-        let l:cmd_line.='>'
-    endif
-    let l:cmd_line.=' ' . a:rhs
-    "echo l:cmd_line
-    exec l:cmd_line
-endfunction
-" Example usage:
-"call MapMeta('map', '<Left>', 'w')
-
-" Set pastetoggle key. This allows us to paste code into terminal vim without
-" vim autoindenting it (in addition to its original intendation).
-" See <http://vim.wikia.com/wiki/VimTip906>.
-set pastetoggle=<F2>
-
 " Mapping cheat sheat:
 " map:  normal; visual; select; operator pending
 " nmap: normal
@@ -122,55 +57,6 @@ set pastetoggle=<F2>
 " <http://vim.wikia.com/wiki/VimTip330>.
 "nnoremap <F8> :setl noai nocin nosi inde=<CR>
 
-" Ctrl+arrows
-
-" NOTE: Strange: by default, the <C-Left/Right> bindings cover more ground in
-" normal mode than in insert mode, e.g. the string "<C-Left>" is treated as
-" five words in normal mode but only one in insert mode! In normal mode, w/b
-" move like <C-Left/Right> do in insert mode; B/W moves like <C-Left/Right> do
-" in normal mode.
-
-" For OS X Terminal and gvim (and hopefully xterm):
-" Opt+arrows
-" Note that if we specify <silent> for c*map, the command line won't reflect
-" movement of the cursor or deletion of words.
-noremap  <A-Left> B
-inoremap <A-Left> <C-o>B
-cnoremap <A-Left> <C-Left>
-
-noremap  <A-Right> W
-inoremap <A-Right> <C-o>W
-cnoremap <A-Right> <C-Right>
-
-noremap  <A-Up> ^
-inoremap <A-Up> <C-o>^
-cnoremap <A-Up> <Home>
-
-noremap  <A-Down> $
-inoremap <A-Down> <C-o>$
-cnoremap <A-Down> <End>
-
-" Ctrl+Left/Right - move CamelCase-wordwise
-map  <silent> <C-Right> <Plug>CamelCaseMotion_w
-imap <silent> <C-Right> <C-o><C-Right>
-map  <silent> <C-Left>  <Plug>CamelCaseMotion_b
-imap <silent> <C-Left>  <C-o><C-Left>
-
-" Ctrl+Up/Down - like Opt+Up/Down
-" TODO: Maybe change this to Page Up/Down, as per Mac standard (?)
-map  <C-Up>   <A-Up>
-map! <C-Up>   <A-Up>
-map  <C-Down> <A-Down>
-map! <C-Down> <A-Down>
-
-" Opt+Backspace (Delete)
-" I'd like to have Ctrl+Backspace and Delete too, but OS X Terminal doesn't
-" allow you to map Backspace combinations.
-" TODO: This doesn't delete across stuff like parentheses and operators; dB
-" does. I would like it to work like dB eventually.
-inoremap <A-Backspace> <C-w>
-cnoremap <A-Backspace> <C-w>
-
 " CamelCase-wise previous word deletion
 function! IsDirectlyAfterLeadingWhitespace()
     if col('.') == 1
@@ -182,41 +68,6 @@ function! IsDirectlyAfterLeadingWhitespace()
         return l:result
     endif
 endfunction
-
-" Thanks in part to jamessan on #vim
-" Save original <C-w>
-inoremap <C-\><C-w> <C-w>
-
-" TODO: Get this working again. I think my Cscope bindings may step on the use
-" of <C-\> here.
-imap <expr> <C-w>
-\ (virtcol('.') == 1 ?
-    \ '<Backspace>' :
-    \ (IsDirectlyAfterLeadingWhitespace() ?
-        \ '<C-\><C-w>' :
-        \ (virtcol('.') == virtcol('$') ?
-            \ ' <C-\><C-n>dbxa' :
-            \ '<C-o>db'
-        \ )
-    \ )
-\ )
-
-imap <C-Backspace> <C-w>
-cmap <C-Backspace> <C-w>
-
-" Opt+Delete (Fn+Delete)
-" Unfortunately Opt+Fn+Delete doesn't send <Esc><Delete> by default in OS X
-" Terminal; see .vimrc-keys-term for binding to handle that.
-" Not sure if we need this in normal mode (although <Delete> is enabled
-" there).
-noremap  <A-Delete> dW
-inoremap <A-Delete> <C-o>dW
-cnoremap <A-Delete> <Delete>
-
-" Run xmp -- evaluate selected Ruby code and put #=> value at the ends of
-" lines.
-" TODO: Use built-in Ruby mode?
-"noremap <silent> <F3> :!ruby -r ~/Scripts/xmp/xmp -n -e 'xmp($_, "\%l\t\t\# -> \%r\n")'<CR>
 
 " Allow selection of pasted text with <Leader>gv, the way old selection is
 " reselected with gv.
@@ -255,44 +106,6 @@ cnoremap <S-CR> <CR>
 map <silent> ,w <Plug>CamelCaseMotion_w
 map <silent> ,b <Plug>CamelCaseMotion_b
 map <silent> ,e <Plug>CamelCaseMotion_e
-
-" Additional cursor movement goodness
-" Opt+j/k - work like Ctrl+Left/Right
-map  <A-j> <C-Left>
-map! <A-j> <C-Left>
-map  <A-k> <C-Right>
-map! <A-k> <C-Right>
-" Opt+h/l - work like Opt+Left/Right
-map  <A-h> <A-Left>
-map! <A-h> <A-Left>
-map  <A-l> <A-Right>
-map! <A-l> <A-Right>
-" Opt+u/i - work like Opt+Up/Down
-map  <A-u> <A-Up>
-map! <A-u> <A-Up>
-map  <A-i> <A-Down>
-map! <A-i> <A-Down>
-" Shift+Opt+hjkl - work like hjkl in normal mode
-map  <A-H> <Left>
-map! <A-H> <Left>
-map  <A-J> <Down>
-map! <A-J> <Down>
-map  <A-K> <Up>
-map! <A-K> <Up>
-map  <A-L> <Right>
-map! <A-L> <Right>
-
-" Ctrl+Home and End
-if !has('gui_running')
-    exec "set <C-Home>=\<Esc>[7^"
-    exec "set <C-End>=\<Esc>[8^"
-endif
-map  <C-Home> gg
-imap <C-Home> <C-o>gg
-cmap <C-Home> <Home>
-map  <C-End> G$
-imap <C-End> <C-o>G<C-o>$
-cmap <C-End> <End>
 
 " A very nice sequence Raimondi gave me, which (when the cursor is on a brace
 " or other matchable delimiter) deletes the braces (and the lines they're on)
@@ -345,15 +158,11 @@ function! Unblockify()
     endif
 endfunction
 
-noremap <silent> <A-%> :call Unblockify()<CR>
-
 " [\ and ]\ switch buffers
 " TODO: Make these ignore NERDTree, quickfix, dbext, and other annoying
 " buffers.
 nnoremap <silent> [\ :bN<CR>
 nnoremap <silent> ]\ :bn<CR>
-" \n toggles NERD Tree
-nnoremap <silent> <Leader>n :NERDTreeToggle<CR>
 
 " Find number of listed buffers
 function! CountListedBuffers()
@@ -421,24 +230,9 @@ noremap ,X "_X
 vnoremap ,p "_dP
 vnoremap ,P "_dP
 
-" Send last-yanked text to Clipper, assuming it's running (port 8377)
-" NOTE that this doesn't yet handle Unicode correctly.
-" TODO: In the terminal, the cursor disappears if I use <silent> here.
-nnoremap <leader>y :call system('nc localhost 8377', @0)<CR>
-
 " ZoomWin - map <C-w><C-o> to function like <C-w>o (which zooms/unzooms
 " window)
 nmap <C-w><C-o> <C-w>o
-
-" Open new split with blank buffer
-" TODO: Did I mean to make these non-n maps use Cmd+*lower-case* n?
-if has('gui_running') && has('gui_macvim')
-    nnoremap <special> <D-N> :new<CR>
-    vmap <special> <D-n> <Esc><D-n>gv
-    imap <special> <D-n> <C-O><D-n>
-    cmap <special> <D-n> <C-C><D-n>
-    omap <special> <D-n> <Esc><D-n>
-endif
 
 " EasyMotion
 let g:EasyMotion_do_mapping = 1
@@ -481,18 +275,6 @@ nnoremap <silent> <Leader>zt :<C-u>exec 'normal! ' . v:count . 'kzt' . v:count .
 
 " Put line <count> lines above cursor (default 1) at top of window.
 nnoremap <silent> <Leader>zb :<C-u>exec 'normal! ' . v:count . 'jzb' . v:count . 'k'<CR>
-
-" Show syntax groups under cursor
-" TODO: Find a key binding for this, or make a function or something.
-noremap <silent> <F9> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
-inoremap <silent> <F9> <C-o>:echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
-
-" Use Cmd+Enter for fullscreen (in addition to MacVim's default Ctrl+Cmd+F)
-if has('gui_running') && has('gui_macvim')
-    noremap <D-Enter> :set invfullscreen<CR>
-endif
-" And Alt+Enter, for Mac and other platforms
-noremap <M-Enter> :set invfullscreen<CR>
 
 " From Ben Fritz on vim-use; use <C-Space> in normal, visual, and
 " operator pending modes to cycle between no numbering, relative numbering,
@@ -550,33 +332,7 @@ noremap <Leader>l :ls<CR>
 " restores the # and % buffers afterward.
 noremap <Leader>b :<C-u>let g:bufdo_bufnr=bufnr('%') \| let g:bufdo_bufnr_prev=bufnr('#') \| bufdo set eventignore-=Syntax \|  \| exec 'buffer '.g:bufdo_bufnr_prev \| exec 'buffer '.g:bufdo_bufnr<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
 
-" Use <F11> to force recompilation/refresh in YouCompleteMe
-noremap <silent> <f5> :silent :YcmForceCompileAndDiagnostics<CR>:ll<CR>
-noremap <silent> <f6> :silent :YcmCompleter FixIt<CR>
-
-" Use <A-Space> as usual in Windows. Currently, without this, physically
-" pressing <A-Space> causes the cursor to flash, but nothing happens. It's
-" supposed to pull down the Windows window operation menu like it does in
-" other apps.
-if IsHostOSWindows()
-    :nnoremap <A-Space> :simalt ~<CR>
-    " Unfortunately this has a slight defect, in that using <C-o> at the end
-    " of a line with only whitespace preceding causes the cursor to end up at
-    " the very beginning of the line.
-    :inoremap <A-Space> <C-o>:simalt ~<CR>
-endif
-
 " Mappings to change settings related to hard tabs/spaces
 nnoremap <Leader><Tab> :set listchars-=tab:→\  listchars+=tab:\ \  noexpandtab ts=8 sts=8 sw=8<CR>
 nnoremap <Leader><C-o> :set listchars-=tab:\ \  listchars+=tab:→\  expandtab ts=8 sts=4 sw=4<CR>
 nnoremap <Leader><C-p> :set listchars-=tab:→\  listchars+=tab:\ \  noexpandtab ts=4 sts=4 sw=4<CR>
-
-" Source terminal-specific key bindings
-" TODO: Actually, "terminal-specific" isn't valid anymore, since I'm going to
-" use these same keybindings in Linux and Windows terminal vim and gvim. As it
-" stands, the dichotomy is between MacVim GUI and everything else.
-" TODO: The -term file uses terminal-specific stuff anyway. Must fix that.
-if !( has('gui_running') && has('gui_macvim') )
-    let b:this_dir = expand('<sfile>:p:h')
-    call SourceIfReadable(b:this_dir . '/vimrc-keys-term')
-endif

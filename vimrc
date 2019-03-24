@@ -259,9 +259,6 @@ set hidden
 " Tab at beginning of line inserts 'shiftwidth' spaces, instead of 'tabstop'. Only matters when softtabstop=0 (which in my config it isn't)
 set smarttab
 
-" Put dbext menu directly in menubar
-let g:dbext_default_menu_mode = 2
-
 " Do not truncate message lines by putting "..." in the middle
 set shortmess-=T
 
@@ -295,10 +292,6 @@ if $TERM_PROGRAM == 'iTerm.app'
 endif
 
 
-" CSApprox settings
-" Don't display error message if terminal has <88 colors
-let g:CSApprox_verbose_level = 0
-
 " Line numbering settings
 " We might want to turn this off in terminals if it slows things down too much
 "set number         " shows absolute line numbers
@@ -308,189 +301,10 @@ let g:CSApprox_verbose_level = 0
 
 
 
-"
-" NERD Tree settings
-"
-" Commented out; not using NERDTree for the time being.
-" TODO: See if I want to retain the quickfix-related settings here. If so,
-" extract them from here and wrap them in a proper augroup.
-if 0
-    if has("autocmd")
-      " In NERDTree tree buffers and quickfix buffers, don't number lines; don't
-      " force cursor away from top or bottom of view; highlight cursor line.
-      if exists('+relativenumber')
-        autocmd FileType nerdtree,qf setl nornu
-      endif
-      autocmd FileType nerdtree,qf setl nonu scrolloff=0 cursorline
-    endif
-    " Allow single-clicking to open dirs/files in NERD Tree
-    "let NERDTreeMouseMode=3
-    " Allow single-clicking to open dirs open in NERD Tree
-    " TODO: NERD Tree seems to have a bug where dragging to resize the split ends
-    " up collapsing the tree, at least if you haven't already done any
-    " collapsing/expanding. Fix that.
-    let NERDTreeMouseMode = 2
-    " Make NERD Tree change working directory to whatever the tree's root is
-    let NERDTreeChDirMode = 2
-    " Use arrows instead of old +~| characters for tree
-    let g:NERDTreeDirArrows = 1
-    " Leave at least 80 columns in main window.
-    " TODO: Find some way to have it automatically adjust when window is resized.
-    " TODO: Also take into account number of columns taken by line numbers, if
-    " used.
-    " TODO: Fix this so it doesn't set the NERD Tree window to 1 column wide in
-    " MacVim/gvim.
-    if &columns < 80 + 31 + 1 " tree width is normally 31 by default; 1 more for divider
-      let g:NERDTreeWinSize = &columns - 80 - 1
-    endif
+call SourceIfReadable(b:this_dir . '/' . 'vimrc-gist')
 
-    " Use Ag (the Silver Searcher) instead of Ack for searching with ack.vim
-    let g:path_to_search_app = "ag"
-
-    " TODO: I'm experimenting with this. Figure out if it's worth keeping. If
-    " NOTE: Nope; this is flaky so far. Too bad.
-    " so:
-    " TODO: make it scroll to show highlighted file;
-    " TODO: make it not always expand directories
-    " TODO: make it behave nicely with files in multiple directory trees
-    " From
-    " <http://superuser.com/questions/195022/vim-how-to-synchronize-nerdtree-with-current-opened-tab-file-path>.
-    "if has("autocmd")
-    "  " returns true iff is NERDTree open/active
-    "  function! rc:isNTOpen()
-    "    return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
-    "  endfunction
-    "
-    "  " returns true iff focused window is NERDTree window
-    "  function! rc:isNTFocused()
-    "    return -1 != match(expand('%'), 'NERD_Tree')
-    "  endfunction
-    "
-    "  " calls NERDTreeFind iff NERDTree is active, current window contains a modifiable file, and we're not in vimdiff
-    "  function! rc:syncTree()
-    "    if &modifiable && rc:isNTOpen() && !rc:isNTFocused() && strlen(expand('%')) > 0 && !&diff
-    "      NERDTreeFind
-    "      wincmd p
-    "    endif
-    "  endfunction
-    "
-    "  autocmd BufEnter * call rc:syncTree()
-    "endif
-endif
-
-"
-" Vimwiki settings
-"
-
-" TODO
-" Vimwiki stomps on Markdown format, so I'm disabling it for now.
-let loaded_vimwiki = 1
-
-let wiki = {}
-let wiki.path = b:this_dir . '/vimwiki'
-let wiki.path_html = '$HOME/Sites/vimwiki'
-let wiki.auto_export = 1
-let g:vimwiki_list = [wiki]
-"let g:vimwiki_browsers=['~/bin/browser']
-
-"
-" Gist settings
-"
-
-if IsHostOSWindows()
-  let g:gist_clip_command = 'clip'
-  "let g:gist_browser_command = '!start rundll32 url.dll,FileProtocolHandler %URL%' " already the default in autoload/gist.vim
-  "let g:gist_browser_command = 'start %URL%'
-  " TODO: Can't get this to work. I think we have to shellexpand() the
-  " command, which might need to be done in autoload/gist.vim. No combination
-  " of ' or " and \ or \\ or / has worked.
-  "let g:gist_browser_command = 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %URL%'
-elseif IsHostOSOSX()
-  let g:gist_clip_command = 'pbcopy'
-  "let g:gist_browser_command = 'open %URL%' " already the default in autoload/gist.vim
-elseif IsHostOSLinux()
-  let g:gist_clip_command = 'xclip -selection clipboard'
-  "let g:gist_browser_command = 'xdg-open %URL%' " already the default in autoload/gist.vim
-endif
-
-let g:gist_detect_filetype = 1
-let g:gist_open_browser_after_post = 1
-
-"
-" Ruby settings
-"
-
-" Set empty path for Ruby plugin, to speed up startup.
-" If this isn't set, $VIMRUNTIME/ftplugin/ruby.vim invokes Ruby to get the
-" path, which takes a noticeably long time. This path helps with
-" completion, but the completion itself is pretty slow too.
-let g:ruby_path = ".,,"
-
-" Function taken from the aforementioned ruby.vim (and modified), to set a
-" full path in case we want it later.
-function! GetRubyPath(ruby_interpreter)
-  if a:ruby_interpreter != ''
-    let l:ruby_interpreter = a:ruby_interpreter
-  else
-    let l:ruby_interpreter = 'ruby'
-  endif
-
-  if has("ruby") && has("win32")
-    ruby VIM::command( 'let l:ruby_path = "%s"' % ($: + begin; require %q{rubygems}; Gem.all_load_paths.sort.uniq; rescue LoadError; []; end).join(%q{,}) )
-    let g:ruby_path = '.,' . substitute(l:ruby_path, '\%(^\|,\)\.\%(,\|$\)', ',,', '')
-  elseif executable(l:ruby_interpreter)
-    let l:code = "print ($: + begin; require %q{rubygems}; Gem.all_load_paths.sort.uniq; rescue LoadError; []; end).join(%q{,})"
-    if &shellxquote == "'"
-      let l:ruby_path = system(l:ruby_interpreter . ' -e "' . l:code . '"')
-    else
-      let l:ruby_path = system(l:ruby_interpreter . " -e '" . l:code . "'")
-    endif
-    let g:ruby_path = '.,' . substitute(l:ruby_path, '\%(^\|,\)\.\%(,\|$\)', ',,', '')
-  else
-    " If we can't call ruby to get its path, just default to using the
-    " current directory and the directory of the current file.
-    let g:ruby_path = ".,,"
-  endif
-  runtime ftplugin/ruby.vim
-endfunction
-
-command! -bar GetRubyPath call GetRubyPath('ruby')
-command! -bar GetRuby18Path call GetRubyPath('ruby')
-command! -bar GetRuby19Path call GetRubyPath('ruby1.9')
-command! -bar GetJRubyPath call GetRubyPath('jruby')
-
-" From <http://www.cuberick.com/2008/10/ruby-autocomplete-in-vim.html>
-autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
-autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
-autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
-autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
-
-" Make Ruby syntax highlighting not slow CPU so much
-" TODO: Check on docs about this. It's for syntax/ruby.vim.
-let ruby_no_expensive = 1
-
-"
-" Command-T settings
-"
-
-" Number of files to show at a time
-" Note that this is the total number of files it will show at any time;
-" scrolling the list window does no good.
-let g:CommandTMaxHeight = 20
-" Actually a general Vim setting, but it affects what files Command-T shows
+" TODO: Document this (used to be in section about Command-T)
 set wildignore+=.git,*~,*.o,*.class
-" Scan hidden directories
-"let g:CommandTScanDotDirectories = 1
-
-" From <http://stackoverflow.com/a/10495799/1364726>
-fun! Runcmd(cmd)
-  silent! exe "noautocmd botright pedit ".a:cmd
-  noautocmd wincmd P
-  set buftype=nofile
-  exe "noautocmd r! ".a:cmd
-  noautocmd wincmd p
-endfun
-com! -nargs=1 Runcmd :call Runcmd("<args>")
 
 " When long lines wrap, continuation lines should be indented at least as much
 " as the first screen line; additionally also insert eight break characters
@@ -530,65 +344,9 @@ try
 catch /Vim(set):E539/
 endtry
 
-"
-" TagList settings
-"
-let Tlist_Use_Right_Window = 1
-let Tlist_Show_One_File = 0 " already set by default; means show tags for all loaded buffers
-let Tlist_Auto_Highlight_Tag = 1 " already set by default
-let Tlist_Ctags_Cmd = '/usr/local/bin/ctags'
-let Tlist_Enable_Fold_Column = 0
-"let Tlist_Compact_Format = 1
-"let Tlist_Close_On_Select = 1
+call SourceIfReadable(b:this_dir . '/' . 'vimrc-cscope')
 
-"
-" Cscope settings
-"
-
-" See ~/.vim/plugin/cscope_maps.vim, which I downloaded at some point and have
-" modified a little.
-" Key mappings defined in that file use <C-\>, <C-@>, or <C-@><C-@> as
-" leaders; these mean use current window, split horizontally, and split
-" vertically, respectively. This is followed by one of these keys (note that
-" these are the same as the first argument to the `:cscope find` command):
-"
-" s: Find this C symbol
-" g: Find this definition
-" d: Find functions called by this function
-" c: Find functions calling this function
-" t: Find this text string
-" e: Find this egrep pattern
-" f: Find this file
-" i: Find files #including this file
-
-"
-" UltiSnips settings
-"
-let g:UltiSnipsNoPythonWarning = 1 " don't warn if wrong Python or no Python is found
-
-"
-" CtrlP settings
-"
-" TODO: Look into using Vim's builtin wildignore option too.
-let g:ctrlp_custom_ignore = {
-    \ 'dir': '\v[\/](\.git|\.hg|\.svn|tmp\/cache\/.*)$',
-    \ }
-
-" Use backspace to delete backwards, even when it sends 8 instead of 127.
-let g:ctrlp_prompt_mappings = {
-    \ 'PrtBS()': ['<C-h>', '<C-?>', '<BS>'],
-    \ 'PrtCurLeft()': ['<Left>'],
-    \ }
-" When creating new file with <C-y>, don't open a new tab or window
-let g:ctrlp_open_new_file = 'r'
-
-" Not only for CtrlP, although it helps there:
-set wildignore+=.*.swp,.#*#,#*#
-
-" Exclude files from MRU list
-let g:ctrlp_mruf_exclude = '\v(^|[\\\/])\.git[\\\/](index|COMMIT_EDITMSG)$'
-
-
+call SourceIfReadable(b:this_dir . '/' . 'vimrc-ctrlp')
 
 " Restore cursor position in window upon returning to buffer
 if v:version >= 700
@@ -596,117 +354,11 @@ if v:version >= 700
   au BufEnter * if(!&scrollbind && exists('b:winview')) | call winrestview(b:winview) | endif
 endif
 
-" Change <C-p> keybind so it opens MRU window. That way I don't have to wait
-" for list of files in this hierarchy to be updated if all I want to do is
-" visit an open buffer or an MRU file.
-" I can then use <C-b> for open buffers and <C-f> for files in this hierarchy.
-let g:ctrlp_cmd = 'CtrlPMRU'
-
 " Add more HTML tags to built-in indentation rules; see
 " <http://www.vim.org/scripts/script.php?script_id=2075>.
 let g:html_indent_inctags = "html,body,head,tbody,p"
 
-"
-" ack.vim
-"
-" Use Ag (the Silver Searcher) instead of Ack for searching with ack.vim
-let g:ackprg = 'ag --vimgrep'
-
-" Use ag for :grep
-" From ag(1) man page
-set grepprg=ag\ --vimgrep\ $*
-set grepformat=%f:%l:%c:%m
-
-" TODO: Commands from ag.vim/plugin/ag.vim:
-" In ag.vim but NOT in ack.vim
-"command! -bang -nargs=* -complete=file AgBuffer call ag#AgBuffer('grep<bang>',<q-args>)
-"command! -bang -nargs=* -complete=file LAgBuffer call ag#AgBuffer('lgrep<bang>',<q-args>)
-" AgBuffer is defined as:
-"function! ag#AgBuffer(cmd, args)
-"  let l:bufs = filter(range(1, bufnr('$')), 'buflisted(v:val)')
-"  let l:files = []
-"  for buf in l:bufs
-"    let l:file = fnamemodify(bufname(buf), ':p')
-"    if !isdirectory(l:file)
-"      call add(l:files, l:file)
-"    endif
-"  endfor
-"  call ag#Ag(a:cmd, a:args . ' ' . join(l:files, ' '))
-"endfunction
-" Here are its docs:
-"":AgBuffer[!] [options] {pattern}                                    *:AgBuffer*
-""
-""    Search for {pattern} in all open buffers. Behaves just like the |:grep|
-""    command, but will open the |Quickfix| window for you. If [!] is not given
-""    the first error is jumped to.
-""
-""    Note: this will not find changes in modified buffers, since ag can only
-""    find what is on disk! You can save buffers automatically when searching
-""    with the 'autowrite' option. A buffer will be ignored if it is a directory
-""    (an explorer, like netrw).
-""
-"":LAgBuffer [options] {pattern}                                     *:LAgBuffer*
-""
-""    Just like |:AgBuffer| but instead of the |quickfix| list, matches are
-""    placed in the current |location-list|.
-" TODO: See how to add this on in my own scripts so it acts as if it were part
-" of ack.vim.
-
-" *Ag* aliases for *Ack* commands defined in ack.vim/plugin/ack.vim
-command! -bang -nargs=* -complete=file Ag           call ack#Ack('grep<bang>', <q-args>)
-command! -bang -nargs=* -complete=file AgAdd        call ack#Ack('grepadd<bang>', <q-args>)
-command! -bang -nargs=* -complete=file AgFromSearch call ack#AckFromSearch('grep<bang>', <q-args>)
-command! -bang -nargs=* -complete=file LAg          call ack#Ack('lgrep<bang>', <q-args>)
-command! -bang -nargs=* -complete=file LAgAdd       call ack#Ack('lgrepadd<bang>', <q-args>)
-command! -bang -nargs=* -complete=file AgFile       call ack#Ack('grep<bang> -g', <q-args>)
-command! -bang -nargs=* -complete=help AgHelp       call ack#AckHelp('grep<bang>', <q-args>)
-command! -bang -nargs=* -complete=help LAgHelp      call ack#AckHelp('lgrep<bang>', <q-args>)
-" These two weren't part of ag.vim
-command! -bang -nargs=*                AgWindow     call ack#AckWindow('grep<bang>', <q-args>)
-command! -bang -nargs=*                LAgWindow    call ack#AckWindow('lgrep<bang>', <q-args>)
-
-" Commented out; not using ag.vim anymore (deprecated in favor of ack.vim)
-if 0
-    " Don't show help text each time ag is triggered
-    let g:ag_mapping_message = 0
-endif
-
-" Signify (Sy)
-" Override sign column signs
-" See ir_gray colorscheme for these groups.
-highlight default link SignifySignAdd    OverrideSignifySignAdd
-highlight default link SignifySignChange OverrideSignifySignChange
-highlight default link SignifySignDelete OverrideSignifySignDelete
-
-" Airline
-" Enable "smarter tab line" - show virtual tab bar for opened buffers
-"let g:airline#extensions#tabline#enabled = 1
-let g:airline_left_sep=''
-let g:airline_right_sep=''
-let g:airline#extensions#wordcount#enabled = 0
-
-" Airline theme settings
-" NOTE: Besides dark, badwolf and powerlineish are pretty nice.
-let g:airline_theme_patch_func = 'AirlineThemePatch'
-function! AirlineThemePatch(palette)
-  if g:airline_theme == 'dark'
-    let airline_c = a:palette.normal.airline_c
-    let airline_x = a:palette.normal.airline_x
-
-    " Change background color a bit. Since Airline doesn't seem to use GUI
-    " colors in terminals, we're using the number CSApprox calculates for
-    " #303030.
-    " Buffer name
-    let airline_c[1] = '#303030'
-    let airline_c[3] = 236
-    " File type
-    let airline_x[1] = '#303030'
-    let airline_x[3] = 236
-
-    let a:palette.normal.airline_c = airline_c
-    let a:palette.normal.airline_x = airline_x
-  endif
-endfunction
+call SourceIfReadable(b:this_dir . '/' . 'vimrc-ag')
 
 " Tweak to allow the use of OpenSSH sftp and scp in netrw
 " Use slashes, even on Windows.
@@ -715,87 +367,20 @@ endfunction
 " affected.
 set shellslash
 
-"
-" Fugitive
-"
-
-" Always split vertically (this affects Vim in general, but it's most
-" noticeable for me in fugitive).
-set diffopt+=vertical
+call SourceIfReadable(b:this_dir . '/' . 'vimrc-fugitive')
 
 " TODO: Find option to not fold changesets in fugitive. I may actually like
 " that feature, though.
 
-"
-" Signature
-"
+call SourceIfReadable(b:this_dir . '/' . 'vimrc-signature')
 
-" Change a few default mappings; I actually use `[ `] '[ '].
+call SourceIfReadable(b:this_dir . '/' . 'vimrc-delimitmate')
 
-let g:SignatureMap = {
-  \ 'GotoNextLineAlpha'  :  "<Leader>']",
-  \ 'GotoPrevLineAlpha'  :  "<Leader>'[",
-  \ 'GotoNextSpotAlpha'  :  "<Leader>`]",
-  \ 'GotoPrevSpotAlpha'  :  "<Leader>`[",
-  \ }
-
-"
-" Syntastic
-"
-let g:syntastic_always_populate_loc_list=1
-
-" For working with C++14
-" TODO: Figure out why :SyntasticInfo still shows that 'gcc' is the current
-"       checker, and whether that matters. UPDATE: It appears that the 'gcc'
-"       checker still calls out to clang++ where appropriate; it seems to
-"       exist to differentiate itself from avrgcc, clang_check, and clang_tidy
-"       (et al.).
-" TODO: Figure out whether to treat all .h files as C++. Currently that seems
-"       to be the case, but I don't see that I've set it up that way anywhere.
-let g:syntastic_cpp_compiler="clang++"
-let g:syntastic_cpp_compiler_options="-std=c++14 -Wall -Wextra -Wno-missing-braces -Wmissing-field-initializers"
-let g:syntastic_cpp_clang_tidy_args="-extra-arg-before=-std=c++14"
-let g:syntastic_cpp_clang_check_args="-extra-arg-before=-std=c++14"
-let g:syntastic_cpp_check_header=1
-
-"
-" delimitMate
-"
-let g:delimitMate_expand_cr=1
-let g:delimitMate_expand_space=1
-let g:delimitMate_expand_inside_quotes=1
-let g:delimitMate_jump_expansion=1
-
-"
-" vim-session
-"
-let g:session_autosave = 'no'
+call SourceIfReadable(b:this_dir . '/' . 'vimrc-session')
 
 " TODO: Currently endwise's <CR> mapping stomps on that of delimitMate, which
 " makes g:delimitMate_expand_cr=1 not work as intended. I haven't found a good
 " way to disable that yet.
-
-" TODO
-" Solarized
-"
-if 0
-  " Ethan Schoonover recommends setting the terminal's 16 colors to Solarized
-  " values rather than using 256-color mode, which degrades the color values.
-  "let g:solarized_termcolors=256
-  let g:solarized_termcolors=16
-  let g:solarized_diffmode='low'
-  "let g:solarized_diffmode='normal'
-  "let g:solarized_diffmode='high'
-  let g:solarized_termtrans=1
-  "set background=light
-  "set background=dark
-  colorscheme solarized
-  " TODO: Why is it that:
-  " 1. this only works in 16-color mode when $TERM is not a 256-color term?
-  " 2. this doesn't take effect in mvim?
-  " 3. bundle/vim-colors-solarized/autoload/togglebg.vim doesn't load
-  "    automatically?
-endif
 
 
 
@@ -804,4 +389,4 @@ endif
 
 
 " Source key bindings
-call SourceIfReadable(b:this_dir . '/vimrc-keys')
+call SourceIfReadable(b:this_dir . '/' . 'vimrc-keys')

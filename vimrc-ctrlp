@@ -1,0 +1,26 @@
+" CtrlP settings
+"
+" TODO: Look into using Vim's builtin wildignore option too.
+let g:ctrlp_custom_ignore = {
+    \ 'dir': '\v[\/](\.git|\.hg|\.svn|tmp\/cache\/.*)$',
+    \ }
+
+" Use backspace to delete backwards, even when it sends 8 instead of 127.
+let g:ctrlp_prompt_mappings = {
+    \ 'PrtBS()': ['<C-h>', '<C-?>', '<BS>'],
+    \ 'PrtCurLeft()': ['<Left>'],
+    \ }
+" When creating new file with <C-y>, don't open a new tab or window
+let g:ctrlp_open_new_file = 'r'
+
+" Not only for CtrlP, although it helps there:
+set wildignore+=.*.swp,.#*#,#*#
+
+" Exclude files from MRU list
+let g:ctrlp_mruf_exclude = '\v(^|[\\\/])\.git[\\\/](index|COMMIT_EDITMSG)$'
+
+" Change <C-p> keybind so it opens MRU window. That way I don't have to wait
+" for list of files in this hierarchy to be updated if all I want to do is
+" visit an open buffer or an MRU file.
+" I can then use <C-b> for open buffers and <C-f> for files in this hierarchy.
+let g:ctrlp_cmd = 'CtrlPMRU'

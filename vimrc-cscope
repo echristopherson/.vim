@@ -1,0 +1,18 @@
+" Cscope settings
+"
+
+" See ~/.vim/plugin/cscope_maps.vim, which I downloaded at some point and have
+" modified a little.
+" Key mappings defined in that file use <C-\>, <C-@>, or <C-@><C-@> as
+" leaders; these mean use current window, split horizontally, and split
+" vertically, respectively. This is followed by one of these keys (note that
+" these are the same as the first argument to the `:cscope find` command):
+"
+" s: Find this C symbol
+" g: Find this definition
+" d: Find functions called by this function
+" c: Find functions calling this function
+" t: Find this text string
+" e: Find this egrep pattern
+" f: Find this file
+" i: Find files #including this file

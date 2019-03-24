@@ -1,0 +1,12 @@
+"
+" Signature
+"
+
+" Change a few default mappings; I actually use `[ `] '[ '].
+
+let g:SignatureMap = {
+  \ 'GotoNextLineAlpha'  :  "<Leader>']",
+  \ 'GotoPrevLineAlpha'  :  "<Leader>'[",
+  \ 'GotoNextSpotAlpha'  :  "<Leader>`]",
+  \ 'GotoPrevSpotAlpha'  :  "<Leader>`[",
+  \ }
