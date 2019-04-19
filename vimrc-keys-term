@@ -269,12 +269,18 @@ call NvicoMapMeta('z', 'u', 1)
 call NvicoMapMeta('Z', '<C-r>', 1)
 
 vnoremap <special> <A-x> "+x
+" TODO: Add command-line cut.
 
 vnoremap <special> <A-c> "+y
-" TODO: C-y doesn't seem to do anything on the command line.
+" TODO: C-y doesn't seem to do anything on the command line unless there is
+" selected text. I'm not sure how text selection on the command line works; it
+" seems like it requires the mouse. It works at least in the Win32 GUI; not
+" sure about other GUIs or terminal, or NeoVim.
 cnoremap <special> <A-c> <C-y>
 
 nnoremap <silent> <special> <A-v> "+gP
+" TODO: This doesn't cause the selected command line text (see just above) to
+" be deleted prior to pasting.
 cnoremap <special> <A-v> <C-r>+
 execute 'vnoremap <silent> <script> <special> <A-v>' paste#paste_cmd['v']
 execute 'inoremap <silent> <script> <special> <A-v>' paste#paste_cmd['i']
