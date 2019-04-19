@@ -775,6 +775,11 @@ let g:session_autosave = 'no'
 " makes g:delimitMate_expand_cr=1 not work as intended. I haven't found a good
 " way to disable that yet.
 
+"
+" scratch.vim (specifically https://github.com/mtth/scratch.vim)
+"
+let g:scratch_persistence_file=b:this_dir . '/scratch/scratch.txt'
+
 " TODO
 " Solarized
 "
