@@ -100,6 +100,8 @@ if &t_Co > 2 || has("gui_running")
   set hlsearch
   if &t_Co >= 256 || has("gui_running")
     colorscheme ir_gray-EAC-256color
+    "set background=light
+    "colorscheme PaperColor
   endif
 endif
 
@@ -292,6 +294,16 @@ if $TERM_PROGRAM == 'iTerm.app'
     let &t_SI = "\<Esc>]50;CursorShape=1\x7"
     let &t_EI = "\<Esc>]50;CursorShape=0\x7"
   endif
+endif
+
+" Neovim-specific settings
+if has('nvim')
+    " TODO: I had $VIM defined in Windows, pointed at standard Vim. I think I
+    " put that in there so Vim would work right in the console. Taking it out
+    " for now, since these two lets don't prevent standard Vim runtime stuff
+    " from being pulled in.
+    "let $VIM = 'X:\Neovim\share\nvim'
+    "let $VIMRUNTIME = 'X:\Neovim\share\nvim\runtime'
 endif
 
 
@@ -575,10 +587,12 @@ let g:ctrlp_custom_ignore = {
     \ }
 
 " Use backspace to delete backwards, even when it sends 8 instead of 127.
-let g:ctrlp_prompt_mappings = {
+if !exists('g:ctrlp_prompt_mappings') | let g:ctrlp_prompt_mappings = {} | endif
+call extend(g:ctrlp_prompt_mappings, {
     \ 'PrtBS()': ['<C-h>', '<C-?>', '<BS>'],
     \ 'PrtCurLeft()': ['<Left>'],
-    \ }
+    \ })
+
 " When creating new file with <C-y>, don't open a new tab or window
 let g:ctrlp_open_new_file = 'r'
 
@@ -587,6 +601,49 @@ set wildignore+=.*.swp,.#*#,#*#
 
 " Exclude files from MRU list
 let g:ctrlp_mruf_exclude = '\v(^|[\\\/])\.git[\\\/](index|COMMIT_EDITMSG)$'
+
+" First number: maximum shown on screen at once; second number: number of
+" files to present as choices (within a scrolling view).
+let g:ctrlp_match_window = 'max:55,results:55'
+" Never jump to window/tab of already-open buffer; present it in current
+" window instead.
+let g:ctrlp_switch_buffer = 0
+
+" TODO: Evaluate whether these sessions are worth keeping:
+
+" Use caching. (F5 can be used to refresh the cache.)
+let g:ctrlp_use_caching = 1
+
+" When using C-z and C-o, make up to 3 vertical splits to show first 4
+" selected files in; the rest are hidden. The original window is used for the
+" first selected file.
+let g:ctrlp_open_multiple_files = '4vjr'
+
+" TODO: Taken out; too distracting/makes me wait too long to make sure I have
+" the right file selected.
+"" Wait to update display until 250 ms have elapsed since typing.
+"let g:ctrlp_lazy_update = 1
+
+" TODO: Taken out; kind of messes with my flow. I should just use the F2
+" mapping below.
+"" Seed the prompt with current file's relative path.
+"let g:ctrlp_default_input = 1
+
+" TODO: Taken out; even if the current file is shown, I can't select it or
+" close it using CtrlP.
+"" List current file in results (useful for when I want to use F7 to close it).
+"let g:ctrlp_match_current_file = 1
+
+" Store 1000 filenames in MRU list.
+let g:ctrlp_mruf_max = 1000
+
+" Save every MRU file with a tilde character if it's under $HOME.
+let g:ctrlp_tilde_homedir = 1
+
+" Use F2 to toggle whether to show only files under the current directory in
+" MRU mode.
+if !exists('g:ctrlp_prompt_mappings') | let g:ctrlp_prompt_mappings = {} | endif
+call extend(g:ctrlp_prompt_mappings, { 'ToggleMRURelative()': ['<F2>'] })
 
 
 
@@ -684,9 +741,12 @@ highlight default link SignifySignDelete OverrideSignifySignDelete
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 let g:airline#extensions#wordcount#enabled = 0
+" Disable new coc integration until I really explore coc
+let g:airline#extensions#coc#enabled = 0
 
 " Airline theme settings
 " NOTE: Besides dark, badwolf and powerlineish are pretty nice.
+"let g:airline_theme = 'papercolor'
 let g:airline_theme_patch_func = 'AirlineThemePatch'
 function! AirlineThemePatch(palette)
   if g:airline_theme == 'dark'
@@ -713,7 +773,11 @@ endfunction
 " TODO: This messes up CtrlSF, because its call to shellescape causes single
 " quotes to be used instead of double. It's likely other plugins would be
 " affected.
-set shellslash
+" NOTE: Apparently I didn't really use CtrlSF for long. TODO: Try it out again
+" some time? https://github.com/dyng/ctrlsf.vim
+" TODO: vim-rake also gets tripped up by this in s:project_ruby_include_path().
+" TODO: Find ways to make OpenSSH+netrw work without 'shellslash'.
+"set shellslash
 
 "
 " Fugitive
@@ -779,6 +843,13 @@ let g:session_autosave = 'no'
 " scratch.vim (specifically https://github.com/mtth/scratch.vim)
 "
 let g:scratch_persistence_file=b:this_dir . '/scratch/scratch.txt'
+let g:scratch_autohide = 0
+let g:scratch_insert_autohide = 0
+
+"
+" AsyncCommand
+"
+let g:no_asynccommand_maps = 1
 
 " TODO
 " Solarized

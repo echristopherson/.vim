@@ -27,7 +27,8 @@ call minpac#add('Slava/vim-spacebars')
 "call minpac#add('LucHermitte/lh-tags')
 "call minpac#add('LucHermitte/lh-dev')
 "call minpac#add('LucHermitte/lh-brackets')
-call minpac#add('bling/vim-airline')
+call minpac#add('vim-airline/vim-airline')
+call minpac#add('vim-airline/vim-airline-themes')
 call minpac#add('chrisbra/vim-diff-enhanced')
 " Functionality provided by delimitMate (and partially by vim-endwise):
 "call minpac#add('cohama/lexima.vim')
@@ -101,6 +102,8 @@ call minpac#add('junegunn/fzf.vim')
 call minpac#add('tpope/vim-projectionist')
 call minpac#add('radenling/vim-dispatch-neovim')
 call minpac#add('mtth/scratch.vim')
+call minpac#add('NLKNguyen/papercolor-theme')
+call minpac#add('idbrii/AsyncCommand')
 
 " Prompt to remove things not listed here.
 call minpac#clean()

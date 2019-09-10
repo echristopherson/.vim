@@ -19,7 +19,7 @@
 " Set GUI font
 if has('gui_macvim')
     set guifont=Menlo:h11
-elseif has('gui_win32')
+elseif has('gui_win32') || has('nvim')
     "set guifont=Liberation\ Mono:h9
     set guifont=Consolas:h10
 elseif has('gui_gtk')
